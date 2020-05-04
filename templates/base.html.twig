@@ -30,6 +30,12 @@
         <script src="https://cdn.tiny.cloud/1/j7edr96twwloguzfrtwtxsez5j6jx7gbta70ac6v012jsl6z/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
         <script>tinymce.init({selector:'#adminForm',});</script>
 
+        <!-- Map chart required script -->
+        <script src="https://www.amcharts.com/lib/4/core.js"></script> <!-- core module (main module) -->
+        <script src="https://www.amcharts.com/lib/4/maps.js"></script> <!-- maps module -->
+        <script src="https://www.amcharts.com/lib/4/geodata/worldLow.js"></script> <!-- map file in GeoJson format -->
+        <script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
+
         <link rel="shortcut icon" href="assets/img/ico/favicon.ico">
         <link rel="apple-touch-icon" sizes="144x144" href="assets/img/ico/apple-touch-icon-144x144.png">
         <link rel="apple-touch-icon" sizes="114x114" href="assets/img/ico/apple-touch-icon-114x114.png">
@@ -521,13 +527,9 @@
                 });
             </script>
 
-            <!-- Map chart required script -->
-            <script src="https://www.amcharts.com/lib/4/core.js"></script> <!-- core module (main module) -->
-            <script src="https://www.amcharts.com/lib/4/maps.js"></script> <!-- maps module -->
-            <script src="https://www.amcharts.com/lib/4/geodata/worldLow.js"></script> <!-- map file in GeoJson format -->
+
             <script src="js/regionData.js"></script> <!--Json data of Algeria's regions-->
 
-            <script src="https://www.amcharts.com/lib/4/themes/material.js"></script>
 
             <!-- Custom JS -->
             <script src="js/mapConfig.js"></script>
