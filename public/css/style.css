@@ -1,0 +1,8 @@
+.region-list {
+    list-style-type: none;
+}
+
+.region-list a {
+    color: white;
+    font-size: 2em;
+}
