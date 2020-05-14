@@ -5,3 +5,75 @@
 .region-list a {
 
 }
+
+.amcharts-ampopup {
+    overflow: visible;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2000
+}
+
+.amcharts-ampopup-curtain {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2001;
+    background: #fff;
+    opacity: 0.5 !important;
+}
+
+.amcharts-ampopup-title {
+    background-color: red !important;
+    font-weight: bold;
+    font-size: 120%;
+    color: white;
+}
+
+.amcharts-ampopup-content {
+    padding: 1em 2em;
+    background: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0.8);
+    display: inline-block;
+    position: absolute;
+    max-width: 90%;
+    max-height: 90%;
+    overflow: auto;
+    z-index: 2002
+}
+
+.amcharts-ampopup-close {
+    display: block;
+    position: absolute;
+    top: 0.3em;
+    right: 0.3em;
+    background-color: rgb(100, 100, 100);
+    background: rgba(100, 100, 100, 0.1) url(data:image/svg+xml;charset=utf-8;base64,PHN2ZyBoZWlnaHQ9IjUxMiIgdmVyc2lvbj0iMSIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHdpZHRoPSI1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTQ0NS4yIDEwOS4ybC00Mi40LTQyLjRMMjU2IDIxMy42IDEwOS4yIDY2LjhsLTQyLjQgNDIuNEwyMTMuNiAyNTYgNjYuOCA0MDIuOGw0Mi40IDQyLjRMMjU2IDI5OC40bDE0Ni44IDE0Ni44IDQyLjQtNDIuNEwyOTguNCAyNTYiLz48L3N2Zz4=) no-repeat center;
+    background-size: 80%;
+    width: 1.2em;
+    height: 1.2em;
+    cursor: pointer
+}
+
+/* card and menu dashboard style */
+.dashboard_menu {
+    margin-bottom: 10px;
+}
+
+.card-dashboard {
+    padding: 10px;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+    -webkit-transition: .3s ease-in-out;
+    transition: .3s ease-in-out;
+}
+
+.inside_block:hover>.card-img-top, .card-dashboard:hover {
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}
+.inside_block:hover, .card-dashboard:hover {
+    background-color: lightgrey;
+}

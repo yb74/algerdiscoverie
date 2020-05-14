@@ -20,24 +20,60 @@
         <div class="section-inner nopaddingbottom">
 
             <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <p class="lead">Sold old ten are quit lose deal his sent. You correct how sex several far distant believe journey parties. We shyness enquire uncivil affixed it carried to. </p>
-                        <p>End sitting shewing who saw besides son musical adapted. Contrasted interested eat alteration pianoforte sympathize was. He families believed if no elegance interest surprise an. It abode wrong miles an so delay plate.</p>
-                        <p class="mt30"><a href="#contact" class="btn btn-primary btn-theme page-scroll">Get In Touch</a></p>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div id="message"></div>
-                        <form method="post" action="sendemail.php" id="contactform" class="main-contact-form wow">
-                            <input type="text" class="form-control col-md-4" name="name" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name." />
-                            <input type="text" class="form-control col-md-4" name="email" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address." />
-                            <input type="text" class="form-control col-md-4" name="website" placeholder="Your URL *" id="website" required data-validation-required-message="Please enter your web address." />
-                            <textarea name="comments" class="form-control" id="comments" placeholder="Your Message *" required data-validation-required-message="Please enter a message."></textarea>
-                            <input class="btn btn-primary mt30 btn-white pull-right" type="submit" name="submit" value="Submit" />
-                        </form>
+                <div class="row header-dashboard py-5">
+                    <div class="col-md-12 text-center dashboard_menu">
+                        <h2>Posts</h2>
+                        <a href="{{ path('manageUsers') }}" class="btn btn-info btn-dashboard">User list</a>
+                        <a href="{{ path('manageComments') }}" class="btn btn-info btn-dashboard">Comment list</a>
+                        <a href="{{ path('article_new') }}" class="btn btn-info btn-dashboard">Create a post</a>
                     </div>
                 </div>
+
+                <section class="ftco-section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="case">
+                                    <div class="row">
+                                {% for article in articles %}
+                                        <div class="col-xl-4 col-lg-6 col-md-12 card py-5 card-dashboard">
+                                            <div class="text w-100 pl-md-3 text-center">
+                                                <img src="{{ article.picture }}" alt="Article image" class="img-fluid mb-3">
+                                                <p class="text-center">Title</p>
+                                                <h3 class="text-center">
+                                                    {{ article.title }}
+                                                </h3>
+                                                <p class="text-center">Region</p>
+                                                <h3 class="text-center">
+                                                    {{ article.region.name }}
+                                                </h3>
+                                                <p class="text-center">Category</p>
+                                                <h3 class="text-center">
+                                                    {{ article.category.name }}
+                                                </h3>
+                                                <p class="text-center">Number of comments</p>
+                                                <h3 class="text-center">
+                                                    {{ article.comments | length }}
+                                                </h3>
+                                                <p class="text-center">Creation date</p>
+                                                <h3 class="text-center">
+                                                    {{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}
+                                                </h3>
+                                                <br>
+                                                <p class="text-center">Available options</p>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-success btn-sm mx-2 display-button">See</a>
+                                                    <a href="{{ path('article_edit', {'id': article.id}) }}" class="btn btn-warning btn-sm mx-2 modify-button">Edit</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
 
         </div>
