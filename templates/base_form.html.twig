@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    {#        <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">#}
+    {#        <link rel="icon" href="/public/images/favicon.ico" type="image/x-icon">#}
+    {#        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">#}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Blog of Jean Forteroche">
+    <meta name="author" content="Jean Forteroche">
+
+    <title>{% block title %}Welcome!{% endblock %}</title>
+
+    <!-- FB Open Graph data -->
+    <meta property="og:title" content="Single ticket for Alaska by Jean Forteroche" />
+    <meta property="og:type" content="Online novel" />
+    {#        <meta property="og:url" content="http://www.jeanforteroche.webagencypro.fr" />#}
+    {#        <meta property="og:image" content="public/img/logo.jpg" />#}
+    <meta property="og:description" content="Come and take a tour to Alaska through the latest online novel by Jean Forteroche"/>
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="Online novel" />
+    <meta name="twitter:title" content="Single ticket for Alaska by Jean Forteroche" />
+    {#        <meta name="twitter:image:src" content="http://www.jeanforteroche.webagencypro.fr/public/images/logo.png" />#}
+    <meta name="twitter:description" content="Come and to take a tour to Alaska through the latest online novel by Jean Forteroche"/>
+
+    <!-- TinyMCE -->
+    <script src="https://cdn.tiny.cloud/1/j7edr96twwloguzfrtwtxsez5j6jx7gbta70ac6v012jsl6z/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({selector:'.adminForm',});</script>
+
+    <link rel="shortcut icon" href="{{asset('assets/img/ico/favicon.ico')}}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{asset('assets/img/ico/apple-touch-icon-144x144.png')}}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{asset('assets/img/ico/apple-touch-icon-114x114.png')}}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{asset('assets/img/ico/apple-touch-icon-72x72.png')}}">
+    <link rel="apple-touch-icon" href="{{asset('assets/img/ico/apple-touch-icon-57x57.png')}}">
+
+    <!-- Bootstrap Core CSS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- Custom CSS -->
+    <link href="{{asset('css/myStyle.css')}}" rel="stylesheet">
+
+    {% block stylesheets %}{% endblock %}
+</head>
+
+<body>
+    <div class="container">
+        {% block body %}{% endblock %}
+
+        {% block javascripts %}{% endblock %}
+    </div>
+</body>
+</html>

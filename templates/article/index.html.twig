@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article index{% endblock %}
+
+{% block body %}
+    <section class="dark-wrapper opaqued parallax" data-parallax="scroll" data-image-src="{{asset('assets/img/bg/bg2.jpg')}}" data-speed="0.7">
+        <div class="section-inner pad-top-200">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 mt30 wow text-center">
+                        <h2 class="section-heading">All articles</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="welcome">
+        <div class="section-inner nopaddingbottom">
+
+            <div class="container">
+                <h1>Article index</h1>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Region</th>
+                            <th>Category</th>
+                            <th>Number of comments</th>
+                            <th>Title</th>
+                            <th>Content</th>
+                            <th>CreatedAt</th>
+                            <th>Picture</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for article in articles %}
+                        <tr>
+                            <td>{{ article.region.name }}</td>
+                            <td>{{ article.category.name }}</td>
+                            <td>{{ article.comments | length }}</td>
+                            <td>{{ article.title }}</td>
+                            <td>{{ article.content }}</td>
+                            <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                            <td><img src="{{ article.picture }}" alt="Article image"></td>
+                            <td>
+                                <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+{% endblock %}

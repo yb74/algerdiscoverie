@@ -1,0 +1,59 @@
+{% extends 'base_form.html.twig' %}
+
+{% block title %}Edit Article{% endblock %}
+
+{% block body %}
+{#    <section class="dark-wrapper opaqued parallax" data-parallax="scroll" data-image-src="{{ article.picture }}" data-speed="0.7">#}
+{#        <div class="section-inner pad-top-200">#}
+{#            <div class="container text-center">#}
+{#                <div class="row">#}
+{#                    <div class="col-lg-12 mt30 wow animated" style="visibility: visible;">#}
+{#                        <h2 class="section-heading">Edit the article: <br>{{ article.title }}</h2>#}
+{#                        <div class="item-metas text-muted mb30 white">#}
+{#                            <span class="meta-item"><i class="pe-icon pe-7s-folder"></i> POSTED IN <span>News</span></span>#}
+{#                            <span class="meta-item"><i class="pe-icon pe-7s-ticket"></i> TAGS <span>Photography</span></span>#}
+{#                            <span class="meta-item"><i class="pe-icon pe-7s-user"></i> AUTHOR <span>Danny Jones</span></span>#}
+{#                            <span class="meta-item"><i class="pe-icon pe-7s-comment"></i> COMMENTS <span>3</span></span>#}
+{#                            <span class="meta-item post-date"><i class="pe-icon pe-7s-clock"></i> POSTED <span>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</span></span>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </section>#}
+
+    <h1>Edit Article</h1>
+
+    {{ include('article/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('article') }}">back to list</a>
+
+    {{ include('article/_delete_form.html.twig') }}
+
+{#    <section id="welcome">#}
+{#        <div class="section-inner nopaddingbottom">#}
+
+{#            <div class="container">#}
+{#                <div class="row">#}
+{#                    <div class="col-md-6">#}
+{#                        <p class="lead">Sold old ten are quit lose deal his sent. You correct how sex several far distant believe journey parties. We shyness enquire uncivil affixed it carried to. </p>#}
+{#                        <p>End sitting shewing who saw besides son musical adapted. Contrasted interested eat alteration pianoforte sympathize was. He families believed if no elegance interest surprise an. It abode wrong miles an so delay plate.</p>#}
+{#                        <p class="mt30"><a href="#contact" class="btn btn-primary btn-theme page-scroll">Get In Touch</a></p>#}
+{#                    </div>#}
+
+{#                    <div class="col-md-6">#}
+{#                        <div id="message"></div>#}
+{#                        <form method="post" action="sendemail.php" id="contactform" class="main-contact-form wow">#}
+{#                            <input type="text" class="form-control col-md-4" name="name" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name." />#}
+{#                            <input type="text" class="form-control col-md-4" name="email" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address." />#}
+{#                            <input type="text" class="form-control col-md-4" name="website" placeholder="Your URL *" id="website" required data-validation-required-message="Please enter your web address." />#}
+{#                            <textarea name="comments" class="form-control" id="comments" placeholder="Your Message *" required data-validation-required-message="Please enter a message."></textarea>#}
+{#                            <input class="btn btn-primary mt30 btn-white pull-right" type="submit" name="submit" value="Submit" />#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+
+{#        </div>#}
+{#    </section>#}
+{% endblock %}
