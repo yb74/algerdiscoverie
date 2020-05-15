@@ -3,7 +3,7 @@
 {% block title %} {{ article.title }} {% endblock %}
 
 {% block body %}
-{#    <section class="dark-wrapper opaqued parallax" data-parallax="scroll" data-image-src="{{ article.picture }}" data-speed="0.7">#}
+{#    <section class="dark-wrapper opaqued parallax" data-parallax="scroll" data-image-src="<img src="{{ vich_uploader_asset(article,'imageFile') }}" class="img-thumbnail" alt="{{ article.imagename }}">" data-speed="0.7">#}
 {#        <div class="section-inner pad-top-200">#}
 {#            <div class="container text-center">#}
 {#                <div class="row">#}
@@ -22,12 +22,6 @@
 {#        </div>#}
 {#    </section>#}
 
-{#    <img src="{{ article.picture }}" alt="article picture">#}
-{#    <p>Username: {{ app.user.username }}</p>#}
-{#    {% if app.debug %}#}
-{#        <p>Request method: {{ app.request.method }}</p>#}
-{#        <p>Application Environment: {{ app.environment }}</p>#}
-{#    {% endif %}#}
     <h2>{{ article.title }}</h2> <span class="font-weight-bold">{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</span>
     <p>{{ article.content }}</p>
 

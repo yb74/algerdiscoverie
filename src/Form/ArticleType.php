@@ -18,7 +18,6 @@ class ArticleType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
-            ->add('picture')
             ->add('imageFile', VichImageType::class, [
                  'required' => false,
                  'allow_delete' => true,

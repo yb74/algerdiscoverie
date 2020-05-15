@@ -43,7 +43,7 @@
                             <td>{{ article.title }}</td>
                             <td>{{ article.content }}</td>
                             <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                            <td><img src="{{ vich_uploader_asset(article,'imageFile') }}" alt="{{ article.imagename }}"></td>
+                            <td><img src="{{ vich_uploader_asset(article,'imageFile')|imagine_filter('echelle') }}" alt="{{ article.imagename }}"></td>
                             <td>
                                 <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
                                 {% if is_granted('ROLE_ADMIN') %}

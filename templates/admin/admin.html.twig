@@ -38,7 +38,7 @@
                                 {% for article in articles %}
                                         <div class="col-xl-4 col-lg-6 col-md-12 card py-5 card-dashboard">
                                             <div class="text w-100 pl-md-3 text-center">
-                                                <img src="{{ article.picture }}" alt="Article image" class="img-fluid mb-3">
+                                                <img src="{{ vich_uploader_asset(article,'imageFile') }}" class="img-fluid mb-3" alt="{{ article.imagename }}">
                                                 <p class="text-center">Title</p>
                                                 <h3 class="text-center">
                                                     {{ article.title }}

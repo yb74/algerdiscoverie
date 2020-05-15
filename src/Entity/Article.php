@@ -24,7 +24,7 @@ class Article
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
-     * @Vich\UploadableField(mapping="product_image", fileNameProperty="imageName", size="imageSize")
+     * @Vich\UploadableField(mapping="article_image", fileNameProperty="imageName", size="imageSize")
      *
      * @var File|null
      */
@@ -118,11 +118,6 @@ class Article
     private $region;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $picture;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="articles")
      * * @ORM\JoinColumn(nullable=false)
      */
@@ -214,18 +209,6 @@ class Article
     public function setRegion(?Region $region): self
     {
         $this->region = $region;
-
-        return $this;
-    }
-
-    public function getPicture(): ?string
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(string $picture): self
-    {
-        $this->picture = $picture;
 
         return $this;
     }
