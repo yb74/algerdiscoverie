@@ -1,0 +1,32 @@
+liip_imagine:
+    resolvers:
+        default:
+            web_path:
+                web_root: "%kernel.project_dir%/public"
+                cache_prefix: "/media/cache"
+
+    driver: "gd"
+    filter_sets:
+        cache: ~
+        carre:
+            quality:   75
+            filters:
+                thumbnail:
+                    size: [120, 90]
+                    mode: outbound
+
+#                background: { size: [124, 94], position: center, color: '#000000' }
+
+        echelle:
+            quality: 85
+            filters:
+                scale:
+                    dim: [250, 250]
+        article:
+            quality: 80
+            filters:
+                upscale:
+                    min: [800, 400]
+                thumbnail:
+                    size: [800, 400]
+                    mode: outbound
