@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_form.html.twig' %}
 
 {% block title %}Article index{% endblock %}
 
@@ -35,7 +35,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                    {% if not is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('article_user_new') }}" class="btn btn-info">Create article</a>
+                    {% endif %}
                     {% for article in articles %}
+                        {% if article.published == true %}
                         <tr>
                             <td>{{ article.region.name }}</td>
                             <td>{{ article.category.name }}</td>
@@ -44,13 +48,24 @@
                             <td>{{ article.content }}</td>
                             <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                             <td><img src="{{ vich_uploader_asset(article,'imageFile')|imagine_filter('echelle') }}" alt="{{ article.imagename }}"></td>
+{#                            <td><img src="{{ vich_uploader_asset(article,'imageFile') }}"></td>#}
                             <td>
                                 <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
                                 {% if is_granted('ROLE_ADMIN') %}
-                                <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
+                                    <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
                                 {% endif %}
+                                <a href="{{ path('article_like', {'id' : article.id}) }}" class="btn btn-link js-like">
+                                    {% if app.user and article.isLikedByUser(app.user) %}
+                                    <i class="fas fa-thumbs-up"></i>
+                                    {% else %}
+                                    <i class="far fa-thumbs-up"></i>
+                                    {% endif %}
+                                    <span class="js-likes">{{ article.likes | length }}</span>
+                                    <span class="js-label">Like</span>
+                                </a>
                             </td>
                         </tr>
+                        {% endif %}
                     {% else %}
                         <tr>
                             <td colspan="6">no records found</td>
@@ -61,4 +76,37 @@
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function onClickBtnLike(event) {
+            event.preventDefault();
+
+            const url = this.href; // here, "this" refers to the like button link "a"
+            const spanCount = this.querySelector('span.js-likes');
+            const icon = this.querySelector('i');
+
+            axios.get(url).then(function(response) {
+                spanCount.textContent = response.data.likes;
+
+                if(icon.classList.contains('fas')) {
+                    icon.classList.replace('fas', 'far');
+                } else {
+                    icon.classList.replace('far', 'fas');
+                }
+            }).catch(function(error) {
+                if(error.response.status === 403) {
+                    window.alert("You can't like an article if you're not logged in !")
+                } else {
+                    window.alert("An error has occurred, please, try again later !") // error 404 (wrong url
+                }
+            });
+        }
+
+        document.querySelectorAll('a.js-like').forEach(function(link) {
+            link.addEventListener('click', onClickBtnLike);
+        })
+    </script>
 {% endblock %}

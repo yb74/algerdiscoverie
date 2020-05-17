@@ -36,6 +36,16 @@
                     <div class="col">
                         {{ comment.content | raw }}
                     </div>
+                    {% if is_granted('ROLE_USER') %}
+                    <div class="col">
+                        {% for message in app.flashes('notice') %}
+                        <div class="flash-notice">
+                            {{ message }}
+                        </div>
+                        {% endfor %}
+                        <a href="{{ path('report_comment', {'id': comment.id}) }}" class="btn btn-danger btn-sm mx-2">Report</a>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}

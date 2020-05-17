@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
-class ArticleType extends AbstractType
+class UserArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -19,13 +19,13 @@ class ArticleType extends AbstractType
             ->add('title')
             ->add('content')
             ->add('imageFile', VichImageType::class, [
-                 'required' => false,
-                 'allow_delete' => true,
-                 'download_label' => '...',
-                 'download_uri' => true,
-                 'image_uri' => true,
-                 'asset_helper' => true,
-             ])
+                'required' => false,
+                'allow_delete' => true,
+                'download_label' => '...',
+                'download_uri' => true,
+                'image_uri' => true,
+                'asset_helper' => true,
+            ])
             ->add('region', EntityType::class, [
                 'class' => Region::class,
                 'choice_label' => 'name'
@@ -34,7 +34,6 @@ class ArticleType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'name'
             ])
-            ->add('published')
         ;
     }
 

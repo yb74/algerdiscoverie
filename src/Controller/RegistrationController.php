@@ -25,9 +25,6 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationType::class, $user); // we bind the form fields to the $user
         $form->handleRequest($request); // analyse request
 
-//        $choices = $user->getRoles(); // user choose role in form (label_choice input type)
-//        dump($choices);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -35,7 +32,7 @@ class RegistrationController extends AbstractController
                     $form->get('password')->getData()));
 
                     $user->setRoles((array)'ROLE_USER'); // Role by default
-//                    $user->setRoles($choices);
+
             $user->setCreatedAt(new \DateTime());
 
             $entityManager = $this->getDoctrine()->getManager();
