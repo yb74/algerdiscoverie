@@ -4,59 +4,67 @@
 
 {% block body %}
 
-    <section class="dark-wrapper opaqued parallax" data-parallax="scroll" data-image-src="{{asset('assets/img/bg/bg2.jpg')}}" data-speed="0.7">
-        <div class="section-inner pad-top-200">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 mt30 wow text-center">
-                        <h2 class="section-heading">Comment list</h2>
-                    </div>
+    <header class="masthead">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 text-center bg-white">
+                    <h1 class="font-weight-light">Reported comments</h1>
+                    <p class="lead">Subtile</p>
                 </div>
             </div>
         </div>
-    </section>
+    </header>
 
-    <section id="welcome">
-        <div class="section-inner nopaddingbottom">
+    <!-- Page Content -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row header-dashboard py-5">
+                <div class="col-md-12 text-center dashboard_menu">
+                    <h2>Reported comments</h2>
+                    <a href="{{ path('admin') }}" class="btn btn-info btn-dashboard">Dashboard</a>
+                    <a href="{{ path('manageUsers') }}" class="btn btn-info btn-dashboard">User list</a>
+                    <a href="{{ path('article_new') }}" class="btn btn-info btn-dashboard">Create a post</a>
+                    <a href="{{ path('pendingArticles') }}" class="btn btn-info btn-dashboard">Manage pending articles</a>
+                </div>
+            </div>
 
             <div class="container">
-                <div class="row header-dashboard py-5">
-                    <div class="col-md-12 text-center dashboard_menu">
-                        <h2>Comment list</h2>
-                        <a href="{{ path('admin') }}" class="btn btn-info btn-dashboard">Dashboard</a>
-                        <a href="{{ path('manageUsers') }}" class="btn btn-info btn-dashboard">User list</a>
-                        <a href="{{ path('article_new') }}" class="btn btn-info btn-dashboard">Create a post</a>
-                    </div>
-                </div>
 
-                <div class="container">
-
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>Firstname</th>
-                            <th>Content</th>
-                            <th>Article commented</th>
-                            <th>CreatedAt</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for comment in comments %}
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Content</th>
+                        <th>Article commented</th>
+                        <th>CreatedAt</th>
+                        <th>Number of reports</th>
+                        <th>Unreport comment</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for comment in comments %}
+                        {% if(comment.reported > 0) %}
                             <tr>
                                 <td>{{ comment.username.firstname }}</td>
                                 <td>{{ comment.content }}</td>
                                 <td>{{ comment.article.title }}</td>
                                 <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                                <td>{{ comment.reported}}</td>
+                                <td>
+                                    <a href="{{ path('unreport_comment', {'id': comment.id}) }}" class="btn btn-success btn-sm mx-2">Unreport</a>
+                                    <a href="{{ path('delete_comment', {'id': comment.id}) }}" class="btn btn-danger btn-sm mx-2">Delete</a>
+                                </td>
                             </tr>
-                        {% else %}
-                            <tr>
-                                <td colspan="6">no records found</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+                        {% endif %}
+                    {% else %}
+                        <tr>
+                            <td colspan="6">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
             </div>
+        </div>
     </section>
 
 {% endblock %}

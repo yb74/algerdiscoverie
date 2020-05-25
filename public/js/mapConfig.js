@@ -9,15 +9,44 @@ class Map {
         this.polygonTemplate = this.polygonSeries.mapPolygons.template;
 
         // events
-        this.getLatLngOnclick(); // get latitude and longitude onclick on map
-        this.showRegionInfoOnhover(); // setEvents on hover on regions
+        // this.getLatLngOnclick(); // get latitude and longitude onclick on map
+        // this.showRegionInfoOnhover(); // setEvents on hover on regions
 
         this.configMap();
 
         this.settingImageSeries();
 
         // this.displayPopup(); // adding popup
-        this.displayModal(); // adding modal
+        // this.displayModal(); // adding modal
+
+        this.getRegion();
+    }
+
+    getRegion() {
+        this.polygonTemplate.events.on("hit", ev => {
+
+            fetch('/map/info')
+                .then(response => response.json())
+                .then(regions => regions.forEach((region) => {
+                    let regionData = {
+                        coords: region.coords,
+                        name: region.name,
+                        description: region.description
+                    };
+                    // console.log(regionData);
+                        console.log(regionData.name);
+
+                        let html = "";
+
+                        html += "<tr>";
+                        html += "<td>" + region.coords + "</td>";
+                        html += "<td>" + region.name + "</td>";
+                        html += "<td>" + region.description + "</td>";
+                        html += "</tr>";
+                        document.getElementById("data").innerHTML += html;
+                }))
+                .catch(error => console.log('Error', error));
+        });
     }
 
     configMap() {
@@ -48,23 +77,23 @@ class Map {
         hs.properties.fill = am4core.color("#367B25");
     }
 
-    showRegionInfoOnhover() {
-        // setEvents on hover on regions
-        this.polygonClickEv = this.polygonTemplate.events.on("over", ev => {
-            let regionName = document.getElementById("article-1");
-            // regionName.textContent= ev.target.dataItem.dataContext.name;
-            let data = ev.target.dataItem.dataContext;
-            let info = document.getElementById("region_info");
-            info.innerHTML = "<h3>" + data.name + " (" + data.id + ")</h3>";
-            if (data.description) {
-                info.innerHTML += data.description;
-            } else {
-                info.innerHTML += "<i>No description provided.</i>"
-            }
-            // zoom to an object
-            // ev.target.series.chart.zoomToMapObject(ev.target);
-        });
-    }
+    // showRegionInfoOnhover() {
+    //     // setEvents on hover on regions
+    //     this.polygonClickEv = this.polygonTemplate.events.on("over", ev => {
+    //         let regionName = document.getElementById("article-1");
+    //         // regionName.textContent= ev.target.dataItem.dataContext.name;
+    //         let data = ev.target.dataItem.dataContext;
+    //         let info = document.getElementById("region_info");
+    //         info.innerHTML = "<h3>" + data.name + " (" + data.id + ")</h3>";
+    //         if (data.description) {
+    //             info.innerHTML += data.description;
+    //         } else {
+    //             info.innerHTML += "<i>No description provided.</i>"
+    //         }
+    //         // zoom to an object
+    //         // ev.target.series.chart.zoomToMapObject(ev.target);
+    //     });
+    // }
 
     // displayPopup() {
     //     this.polygonTemplate.events.on("hit", ev => {
@@ -85,61 +114,61 @@ class Map {
     //     });
     // }
 
-    displayModal() {
-        this.polygonTemplate.events.on("hit", ev => {
-            this.map.modal.close();
-            let modalTitle = "Basic information";
-            let modalContent =
-                "<table style=\"position: relative; width: 100%;\">\n" +
-                "<tbody><tr>\n" +
-                "<td><img class=\"flag\" src=\"/img/dz-flag.png\" style=\"vertical-align: bottom; width: 48px;\"></td>\n" +
-                "<td class=\"countryName\">" + ev.target.dataItem.dataContext.name + "</td>\n" +
-                "</tr>\n" +
-                "<tr>\n" +
-                "<td>&nbsp;</td>\n" +
-                "<td class=\"stateName\"></td>\n" +
-                "</tr>\n" +
-                "<tr>\n" +
-                "<td class=\"dialogLabel\"><span id=\"capitalCityNameSpan\" style=\"display: inline;\">Capitale</span><span id=\"capitalStateCityNameSpan\" style=\"display: none;\">Capitale</span> :</td>\n" +
-                "<td class=\"dialogData capitalCityName\">Alger</td>\n" +
-                "</tr>\n" +
-                "<tr>\n" +
-                "<td class=\"dialogLabel\">Population :</td>\n" +
-                "<td class=\"dialogData population\">34 178 188</td>\n" +
-                "</tr>\n" +
-                "<tr>\n" +
-                "<td class=\"dialogLabel\">Superficie :</td>\n" +
-                "<td class=\"dialogData\"><span class=\"area\">2 381 741</span> km<span style=\"font-size: 0.7em; vertical-align: super;\">2</span> (<span class=\"areaPct\">1.59</span>% du monde)</td>\n" +
-                "</tr>\n" +
-                "<tr>\n" +
-                "<td class=\"dialogLabel\"><a href='#' class='btn btn-success'>More info</a></td>\n" +
-                "</tr>\n" +
-                "</tbody></table>";
+    // displayModal() {
+    //     this.polygonTemplate.events.on("hit", ev => {
+    //         this.map.modal.close();
+    //         let modalTitle = "Basic information";
+    //         let modalContent =
+    //             "<table style=\"position: relative; width: 100%;\">\n" +
+    //             "<tbody><tr>\n" +
+    //             "<td><img class=\"flag\" src=\"/img/dz-flag.png\" style=\"vertical-align: bottom; width: 48px;\"></td>\n" +
+    //             "<td class=\"countryName\">" + ev.target.dataItem.dataContext.name + "</td>\n" +
+    //             "</tr>\n" +
+    //             "<tr>\n" +
+    //             "<td>&nbsp;</td>\n" +
+    //             "<td class=\"stateName\"></td>\n" +
+    //             "</tr>\n" +
+    //             "<tr>\n" +
+    //             "<td class=\"dialogLabel\"><span id=\"capitalCityNameSpan\" style=\"display: inline;\">Capitale</span><span id=\"capitalStateCityNameSpan\" style=\"display: none;\">Capitale</span> :</td>\n" +
+    //             "<td class=\"dialogData capitalCityName\">Alger</td>\n" +
+    //             "</tr>\n" +
+    //             "<tr>\n" +
+    //             "<td class=\"dialogLabel\">Population :</td>\n" +
+    //             "<td class=\"dialogData population\">34 178 188</td>\n" +
+    //             "</tr>\n" +
+    //             "<tr>\n" +
+    //             "<td class=\"dialogLabel\">Superficie :</td>\n" +
+    //             "<td class=\"dialogData\"><span class=\"area\">2 381 741</span> km<span style=\"font-size: 0.7em; vertical-align: super;\">2</span> (<span class=\"areaPct\">1.59</span>% du monde)</td>\n" +
+    //             "</tr>\n" +
+    //             "<tr>\n" +
+    //             "<td class=\"dialogLabel\"><a href='#' class='btn btn-success'>More info</a></td>\n" +
+    //             "</tr>\n" +
+    //             "</tbody></table>";
+    //
+    //             // "<img src='../img/dz-flag.png' alt='Algeria\s flag'> <span>" + ev.target.dataItem.dataContext.name + "</span>";
+    //
+    //         let modal = this.map.openModal(modalContent, modalTitle);
+    //         // modal.left = ev.svgPoint.x + 15;
+    //         // modal.top = ev.svgPoint.y + 15;
+    //
+    //         // zoom to an object
+    //         ev.target.series.chart.zoomToMapObject(ev.target);
+    //
+    //         this.map.modal.events.on("opened", ev => {
+    //             // console.log(ev);
+    //         });
+    //
+    //         this.map.modal.events.on("closed", ev => {
+    //             // console.log(ev);
+    //         });
+    //     });
+    // }
 
-                // "<img src='../img/dz-flag.png' alt='Algeria\s flag'> <span>" + ev.target.dataItem.dataContext.name + "</span>";
-
-            let modal = this.map.openModal(modalContent, modalTitle);
-            // modal.left = ev.svgPoint.x + 15;
-            // modal.top = ev.svgPoint.y + 15;
-
-            // zoom to an object
-            ev.target.series.chart.zoomToMapObject(ev.target);
-
-            this.map.modal.events.on("opened", ev => {
-                // console.log(ev);
-            });
-
-            this.map.modal.events.on("closed", ev => {
-                // console.log(ev);
-            });
-        });
-    }
-
-    getLatLngOnclick() {
-        this.map.seriesContainer.events.on("hit", ev => {
-            //console.log(this.map.svgPointToGeo(ev.svgPoint));
-        });
-    }
+    // getLatLngOnclick() {
+    //     this.map.seriesContainer.events.on("hit", ev => {
+    //         //console.log(this.map.svgPointToGeo(ev.svgPoint));
+    //     });
+    // }
 
     settingImageSeries() {
         // // Prepare a MapImageSeries

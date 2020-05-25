@@ -38,6 +38,11 @@ class Comment
      */
     private $createdAt;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $reported;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -87,6 +92,18 @@ class Comment
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getReported(): ?int
+    {
+        return $this->reported;
+    }
+
+    public function setReported(int $reported): self
+    {
+        $this->reported = $reported;
 
         return $this;
     }

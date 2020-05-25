@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
+use App\Entity\Region;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MapController extends AbstractController
@@ -15,5 +18,25 @@ class MapController extends AbstractController
         return $this->render('map/map.html.twig', [
             'controller_name' => 'MapController',
         ]);
+    }
+
+    /**
+     * @Route("/map/info", name="map_info")
+     */
+    public function showRegionData()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $regions = $entityManager->getRepository(Region::class)->findAll();
+
+        $articles = $entityManager->getRepository(Article::class)->findAll();
+
+        $data = [];
+        foreach ($regions as $key => $region) {
+            $data[$key] ['coords'] = $region->getCoords();
+            $data[$key] ['name'] = $region->getName();
+            $data[$key] ['description'] = $region->getDescription();
+        }
+
+        return $this->json($data);
     }
 }

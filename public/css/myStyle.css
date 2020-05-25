@@ -1,9 +1,38 @@
-.region-list {
-    list-style-type: none;
+/* NAVBAR */
+.navbar-light .navbar-nav .nav-link:hover {
+    color: dodgerblue;
 }
 
-.region-list a {
+.navbar-light .navbar-nav .nav-link:active {
+    color: white;
+    background-color: dodgerblue;
+}
 
+/* masthead */
+.masthead {
+    height: 100vh;
+    min-height: 500px;
+    background-image: url('../img/masthead_image.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+/* chapter */
+.chapter_content {
+    background-color: rgba(50, 100, 200, 0.5);
+    border-radius: 20px;
+    padding:20px;
+    color: black;
+}
+
+/* Map style */
+.map {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
 }
 
 .amcharts-ampopup {
@@ -76,4 +105,37 @@
 }
 .inside_block:hover, .card-dashboard:hover {
     background-color: lightgrey;
+}
+
+/* FOOTER */
+footer a {
+    color: white;
+}
+
+footer a:hover {
+    color: dodgerblue;
+    text-decoration: none;
+}
+
+.social-logos {
+    font-size: 1.5em;
+}
+
+.social-logos i:hover {
+    color: dodgerblue;
+    cursor: pointer;
+}
+
+/* @media all and (max-width: 572px) { */
+
+/* Media queries for tabs and smart phones */
+@media all and (max-width: 985px) {
+    .dashboard_menu {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .btn-dashboard {
+        margin: 10px 0;
+    }
 }

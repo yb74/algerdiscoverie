@@ -1,370 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-{#        <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">#}
-{#        <link rel="icon" href="/public/images/favicon.ico" type="image/x-icon">#}
-{#        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">#}
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Blog of Jean Forteroche">
-        <meta name="author" content="Jean Forteroche">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    {#        <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">#}
+    {#        <link rel="icon" href="/public/images/favicon.ico" type="image/x-icon">#}
+    {#        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">#}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Blog of Jean Forteroche">
+    <meta name="author" content="Jean Forteroche">
 
-        <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}Welcome!{% endblock %}</title>
 
-        <!-- FB Open Graph data -->
-        <meta property="og:title" content="Single ticket for Alaska by Jean Forteroche" />
-        <meta property="og:type" content="Online novel" />
-{#        <meta property="og:url" content="http://www.jeanforteroche.webagencypro.fr" />#}
-{#        <meta property="og:image" content="public/img/logo.jpg" />#}
-        <meta property="og:description" content="Come and take a tour to Alaska through the latest online novel by Jean Forteroche"/>
+    <!-- FB Open Graph data -->
+    <meta property="og:title" content="Single ticket for Alaska by Jean Forteroche" />
+    <meta property="og:type" content="Online novel" />
+    {#        <meta property="og:url" content="http://www.jeanforteroche.webagencypro.fr" />#}
+    {#        <meta property="og:image" content="public/img/logo.jpg" />#}
+    <meta property="og:description" content="Come and take a tour to Alaska through the latest online novel by Jean Forteroche"/>
 
-        <!-- Twitter Card data -->
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:site" content="Online novel" />
-        <meta name="twitter:title" content="Single ticket for Alaska by Jean Forteroche" />
-{#        <meta name="twitter:image:src" content="http://www.jeanforteroche.webagencypro.fr/public/images/logo.png" />#}
-        <meta name="twitter:description" content="Come and to take a tour to Alaska through the latest online novel by Jean Forteroche"/>
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="Online novel" />
+    <meta name="twitter:title" content="Single ticket for Alaska by Jean Forteroche" />
+    {#        <meta name="twitter:image:src" content="http://www.jeanforteroche.webagencypro.fr/public/images/logo.png" />#}
+    <meta name="twitter:description" content="Come and to take a tour to Alaska through the latest online novel by Jean Forteroche"/>
 
-        <!-- TinyMCE -->
-        <script src="https://cdn.tiny.cloud/1/j7edr96twwloguzfrtwtxsez5j6jx7gbta70ac6v012jsl6z/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-        <script>tinymce.init({selector:'.adminForm',});</script>
+    <!-- TinyMCE -->
+    <script src="https://cdn.tiny.cloud/1/j7edr96twwloguzfrtwtxsez5j6jx7gbta70ac6v012jsl6z/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>tinymce.init({selector:'.tinyForm',});</script>
 
-        <!-- Map chart required script -->
-        <script src="https://www.amcharts.com/lib/4/core.js"></script> <!-- core module (main module) -->
-        <script src="https://www.amcharts.com/lib/4/maps.js"></script> <!-- maps module -->
-        <script src="https://www.amcharts.com/lib/4/geodata/worldLow.js"></script> <!-- map file in GeoJson format -->
+    <!-- Map chart required script -->
+    <script src="https://www.amcharts.com/lib/4/core.js"></script> <!-- core module (main module) -->
+    <script src="https://www.amcharts.com/lib/4/maps.js"></script> <!-- maps module -->
+    <script src="https://www.amcharts.com/lib/4/geodata/worldLow.js"></script> <!-- map file in GeoJson format -->
 
-        <link rel="shortcut icon" href="{{asset('assets/img/ico/favicon.ico')}}">
-        <link rel="apple-touch-icon" sizes="144x144" href="{{asset('assets/img/ico/apple-touch-icon-144x144.png')}}">
-        <link rel="apple-touch-icon" sizes="114x114" href="{{asset('assets/img/ico/apple-touch-icon-114x114.png')}}">
-        <link rel="apple-touch-icon" sizes="72x72" href="{{asset('assets/img/ico/apple-touch-icon-72x72.png')}}">
-        <link rel="apple-touch-icon" href="{{asset('assets/img/ico/apple-touch-icon-57x57.png')}}">
+    <!-- icones fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-        <!-- Bootstrap Core CSS -->
-        <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
-        <link href="{{asset('assets/css/animate.css')}}" rel="stylesheet">
-        <link href="{{asset('assets/css/plugins.css')}}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{asset('assets/img/ico/favicon.ico')}}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{asset('assets/img/ico/apple-touch-icon-144x144.png')}}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{asset('assets/img/ico/apple-touch-icon-114x114.png')}}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{asset('assets/img/ico/apple-touch-icon-72x72.png')}}">
+    <link rel="apple-touch-icon" href="{{asset('assets/img/ico/apple-touch-icon-57x57.png')}}">
 
-        <!-- Custom CSS -->
-        <link href="{{asset('assets/css/style.css')}}" rel="stylesheet">
-        <link href="{{asset('css/myStyle.css')}}" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-        <!-- Custom Fonts -->
-        <link href="{{asset('assets/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
-        <link href="{{asset('assets/css/pe-icons.css')}}" rel="stylesheet">
-        {% block stylesheets %}{% endblock %}
-    </head>
+    <!-- my CSS -->
+    <link href="{{asset('css/myStyle.css')}}" rel="stylesheet">
 
-    <body id="page-top" class="index">
+    <!-- Bootstrap -->
+{#    <link href="{{asset('bootstrap/bootstrap.min')}}" rel="stylesheet">#}
 
-    <div class="master-wrapper">
+    {% block stylesheets %}{% endblock %}
+</head>
 
-        <div class="preloader">
-            <div class="preloader-img">
-                <span class="loading-animation animate-flicker"><img src="{{asset('assets/img/loading.GIF')}}" alt="loading"/></span>
-            </div>
-        </div>
+<body>
 
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-fixed-top fadeInDown" data-wow-delay="0.5s">
-            <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header page-scroll">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navigation">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand smoothie logo logo-light" href="{{ path('home') }}"><img src="{{asset('assets/img/logo.png')}}" alt="logo"></a>
-                    <a class="navbar-brand smoothie logo logo-dark" href="{{ path('home') }}"><img src="{{asset('assets/img/logo_reverse.png')}}" alt="logo"></a>
-                </div>
+<!-- Navigation -->
+{#<nav class="navbar navbar-expand-lg navbar-light bg-light shadow fixed-top">#}
+{#    <div class="container">#}
+{#        <a class="navbar-brand" href="{{ path('home') }}">ALGERdiscoveRIE</a>#}
+{#        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">#}
+{#            <span class="navbar-toggler-icon"></span>#}
+{#        </button>#}
+{#        <div class="collapse navbar-collapse" id="navbarResponsive">#}
+{#            <ul class="navbar-nav ml-auto">#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="{{ path('home') }}">Home</a>#}
+{#                </li>#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="{{ path('map') }}">Map</a>#}
+{#                </li>#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="{{ path('article') }}">Articles</a>#}
+{#                </li>#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="{{ path('contact') }}">Contact</a>#}
+{#                </li>#}
+{#                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="{{ path('app_logout') }}">Log Out</a>#}
+{#                </li>#}
+{#                {% else %}#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="{{ path('registration') }}">Sign Up</a>#}
+{#                </li>#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="{{ path('app_login') }}">Log In</a>#}
+{#                </li>#}
+{#                {% endif %}#}
+{#                {% if is_granted('ROLE_ADMIN') %}#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link" href="{{ path('admin') }}">Dashboard</a>#}
+{#                </li>#}
+{#                {% endif %}#}
+{#            </ul>#}
+{#        </div>#}
+{#    </div>#}
+{#</nav>#}
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="main-navigation">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                            <a href="{{ path('home') }}">Home</a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="{{ path('map') }}">Map</a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="{{ path('article') }}">List of articles</a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="{{ path('contact') }}">Contact us</a>
-                        </li>
-                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                            <li class="dropdown">
-                                <a href="{{ path('app_logout') }}">Log out</a>
-                            </li>
-                        {% else %}
-                            <li class="dropdown">
-                                <a href="{{ path('registration') }}">Sign Up</a>
-                            </li>
-                            <li class="dropdown">
-                                <a href="{{ path('app_login') }}">Log In</a>
-                            </li>
-                        {% endif %}
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <li class="dropdown">
-                                <a href="{{ path('admin') }}">Dashboard</a>
-                            </li>
-                        {% endif %}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <span class="pe-7s-angle-down"></span></a>
-                            <ul class="dropdown-menu">
-                                <li class="dropdown-submenu">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages - About Us</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">About Us - Layout 1</a></li>
-                                        <li><a href="#">About Us - Layout 2</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown-submenu">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages - Services</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Services - Layout 1</a></li>
-                                        <li><a href="#">Services - Layout 2</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown-submenu">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages - Contact</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="#">Contact - Layout 1</a></li>
-                                        <li><a href="#">Contact - Layout 2</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Pages - 404</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="javascript:void(0);" class="side-menu-trigger hidden-xs"><i class="fa fa-bars"></i></a></li>
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
-            </div>
-            <!-- /.container-fluid -->
-        </nav>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="{{ path('home') }}">ALGERdiscoveRIE</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div id="search-wrapper">
-            <button type="button" class="close">×</button>
-            <div class="vertical-center text-center">
-                <form>
-                    <input type="search" value="" placeholder="Enter Search Term" />
-                    <button type="submit" class="btn btn-primary btn-white">Search</button>
-                </form>
-            </div>
-        </div>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ path('home') }}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('map') }}">Map</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('article') }}">Articles</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('contact') }}">Contact</a>
+            </li>
+            {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_logout') }}">Log Out</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('registration') }}">Sign Up</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_login') }}">Log In</a>
+            </li>
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('admin') }}">Dashboard</a>
+            </li>
+            {% endif %}
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
 
+{#<!-- Full Page Image Header with Vertically Centered Content -->#}
+{#<header class="masthead">#}
+{#    <div class="container h-100">#}
+{#        <div class="row h-100 align-items-center">#}
+{#            <div class="col-12 text-center bg-white">#}
+{#                <h1 class="font-weight-light">Vertically Centered Masthead Content</h1>#}
+{#                <p class="lead">A great starter layout for a landing page</p>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</header>#}
 
+{#<!-- Page Content -->#}
+{#<section class="py-5">#}
+{#    <div class="container">#}
+{#        <h2 class="font-weight-light">Page Content</h2>#}
+{#        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus ab nulla dolorum autem nisi officiis blanditiis voluptatem hic, assumenda aspernatur facere ipsam nemo ratione cumque magnam enim fugiat reprehenderit expedita.</p>#}
+{#    </div>#}
+{#</section>#}
 
         {% block body %}{% endblock %}
 
-        <div id="footer-wrapper">
-            <section class="dark-wrapper">
-                <div class="section-inner">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="widget about-us-widget">
-                                    <h4 class="widget-title"><strong>Global</strong> Coverage</h4>
-                                    <p>Professionally monetize team building materials for 24/7 results. Holisticly transition corporate platforms vis-a-vis cutting-edge experiences. Dynamically strategize ubiquitous applications for premier initiatives. Interactively seize resource sucking niche markets.</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="widget">
-                                    <h4 class="widget-title"><strong>Latest</strong> Articles</h4>
-                                    <div>
-                                        <div class="media">
-                                            <div class="pull-left">
-                                                <img class="widget-img" src="{{asset('assets/img/widget/widget1.jpg')}}" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <span class="media-heading"><a href="#">Blog Post A</a></span>
-                                                <small class="muted">Posted 14 April 2015</small>
-                                            </div>
-                                        </div>
-                                        <div class="media">
-                                            <div class="pull-left">
-                                                <img class="widget-img" src="{{asset('assets/img/widget/widget2.jpg')}}" alt="">
-                                            </div>
-                                            <div class="media-body">
-                                                <span class="media-heading"><a href="#">Blog Post B</a></span>
-                                                <small class="muted">Posted 14 April 2015</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="widget">
-                                    <h4 class="widget-title">Popular Tags</h4>
-                                    <div class="tagcloud">
-                                        <a href="#" class="tag-link btn btn-theme btn-white btn-xs smoothie" title="3 topics">Local</a>
-                                        <a href="#" class="tag-link btn btn-theme btn-white btn-xs smoothie" title="3 topics">Business</a>
-                                        <a href="#" class="tag-link btn btn-theme btn-white btn-xs smoothie" title="3 topics">Media</a>
-                                        <a href="#" class="tag-link btn btn-theme btn-white btn-xs smoothie" title="3 topics">Photogtraphy</a>
-                                        <a href="#" class="tag-link btn btn-theme btn-white btn-xs smoothie" title="3 topics">Aid</a>
-                                        <a href="#" class="tag-link btn btn-theme btn-white btn-xs smoothie" title="3 topics">Fashion</a>
-                                        <a href="#" class="tag-link btn btn-theme btn-white btn-xs smoothie" title="3 topics">News</a>
-                                        <a href="#" class="tag-link btn btn-theme btn-white btn-xs smoothie" title="3 topics">Cars</a>
-                                        <a href="#" class="tag-link btn btn-theme btn-white btn-xs smoothie" title="3 topics">Global Affairs</a>
-                                        <a href="#" class="tag-link btn btn-theme btn-white btn-xs smoothie" title="3 topics">Music</a>
-                                        <a href="#" class="tag-link btn btn-theme btn-white btn-xs smoothie" title="3 topics">Downloads</a>
-                                        <a href="#" class="tag-link btn btn-theme btn-white btn-xs smoothie" title="3 topics">MP3</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+<!-- Footer -->
+<footer class="page-footer font-small bg-dark pt-4">
 
-            <footer class="white-wrapper">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <ul class="list-inline social-links wow">
-                                <li>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-dribbble"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-behance"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-linkedin"></i></a>
-                                </li>
-                            </ul>
-                        </div>
+    <!-- Footer Links -->
+    <div class="container text-center text-md-left text-white">
 
-                        <hr class="thin-hr" />
+        <!-- Grid row -->
+        <div class="row">
 
-                        <div class="col-md-12 text-center wow">
-                            <span class="copyright">Copyright 2019. Designed by DISTINCTIVE THEMES</span>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </div>
+            <!-- Grid column -->
+            <div class="col-md-4 mx-auto">
 
-    </div>
+                <!-- Content -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Footer Content</h5>
+                <p>Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
+                    consectetur
+                    adipisicing elit.</p>
 
-    <div class="flexpanel">
-        <div class="viewport-wrap">
-            <div class="viewport">
-                <div class="widget mb50">
-                    <h4 class="widget-title">Latest Articles</h4>
-                    <div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <img class="widget-img" src="{{asset('assets/img/widget/widget1.jpg')}}" alt="">
-                            </div>
-                            <div class="media-body">
-                                <span class="media-heading"><a href="#">Panic In London</a></span>
-                                <small class="muted">Posted 14 April 2015</small>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <img class="widget-img" src="{{asset('assets/img/widget/widget2.jpg')}}" alt="">
-                            </div>
-                            <div class="media-body">
-                                <span class="media-heading"><a href="#">New iPhone News</a></span>
-                                <small class="muted">Posted 14 April 2015</small>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <img class="widget-img" src="{{asset('assets/img/widget/widget3.jpg')}}" alt="">
-                            </div>
-                            <div class="media-body">
-                                <span class="media-heading"><a href="#">Our Year In Review</a></span>
-                                <small class="muted">Posted 14 April 2015</small>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <img class="widget-img" src="{{asset('assets/img/widget/widget4.jpg')}}" alt="">
-                            </div>
-                            <div class="media-body">
-                                <span class="media-heading"><a href="#">jQuery Tutorial</a></span>
-                                <small class="muted">Posted 14 April 2015</small>
-                            </div>
-                        </div>
-                        <div class="media">
-                            <div class="pull-left">
-                                <img class="widget-img" src="{{asset('assets/img/widget/widget5.jpg')}}" alt="">
-                            </div>
-                            <div class="media-body">
-                                <span class="media-heading"><a href="#">Sheen Interview</a></span>
-                                <small class="muted">Posted 14 April 2015</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="widget mb50">
-                    <h4 class="widget-title"><strong>Latest</strong> Articles</h4>
-                    <div class="tagcloud">
-                        <a href="#" class="tag-link btn btn-theme btn-xs" title="3 topics">Local</a>
-                        <a href="#" class="tag-link btn btn-theme btn-xs" title="3 topics">Business</a>
-                        <a href="#" class="tag-link btn btn-theme btn-xs" title="3 topics">Media</a>
-                        <a href="#" class="tag-link btn btn-theme btn-xs" title="3 topics">Photogtraphy</a>
-                        <a href="#" class="tag-link btn btn-theme btn-xs" title="3 topics">Aid</a>
-                        <a href="#" class="tag-link btn btn-theme btn-xs" title="3 topics">Fashion</a>
-                        <a href="#" class="tag-link btn btn-theme btn-xs" title="3 topics">News</a>
-                        <a href="#" class="tag-link btn btn-theme btn-xs" title="3 topics">Cars</a>
-                        <a href="#" class="tag-link btn btn-theme btn-xs" title="3 topics">Global Affairs</a>
-                        <a href="#" class="tag-link btn btn-theme btn-xs" title="3 topics">Music</a>
-                        <a href="#" class="tag-link btn btn-theme btn-xs" title="3 topics">Downloads</a>
-                        <a href="#" class="tag-link btn btn-theme btn-xs" title="3 topics">MP3</a>
-                    </div>
-                </div>
-                <div class="widget about-us-widget mb50">
-                    <h4 class="widget-title">About Kompleet</h4>
-                    <p>Professionally monetize team building materials for 24/7 results. Holisticly transition corporate platforms vis-a-vis cutting-edge experiences. Dynamically strategize ubiquitous applications for premier initiatives. Interactively seize resource sucking niche markets.</p>
-                </div>
             </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none">
+
+            <!-- Grid column -->
+            <div class="col-md-2 mx-auto">
+
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#!">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 3</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 4</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none">
+
+            <!-- Grid column -->
+            <div class="col-md-2 mx-auto">
+
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#!">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 3</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 4</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
+            <hr class="clearfix w-100 d-md-none">
+
+            <!-- Grid column -->
+            <div class="col-md-2 mx-auto">
+
+                <!-- Links -->
+                <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#!">Link 1</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 2</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 3</a>
+                    </li>
+                    <li>
+                        <a href="#!">Link 4</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- Grid column -->
+
         </div>
+        <!-- Grid row -->
+
     </div>
+    <!-- Footer Links -->
+
+    <hr>
+
+    <!-- Call to action -->
+    <ul class="list-unstyled list-inline text-center text-white py-2">
+        <li class="list-inline-item">
+            <h5 class="mb-1">Register for free</h5>
+        </li>
+        <li class="list-inline-item">
+            <a href="#!" class="btn btn-danger btn-rounded">Sign up!</a>
+        </li>
+    </ul>
+    <!-- Call to action -->
+
+    <hr>
+
+    <!-- Social buttons -->
+    <ul class="list-unstyled list-inline text-center text-white">
+        <li class="list-inline-item">
+            <a class="btn-floating btn-fb mx-1 social-logos">
+                <i class="fab fa-facebook-f"> </i>
+            </a>
+        </li>
+        <li class="list-inline-item">
+            <a class="btn-floating btn-tw mx-1 social-logos">
+                <i class="fab fa-twitter"> </i>
+            </a>
+        </li>
+        <li class="list-inline-item">
+            <a class="btn-floating btn-gplus mx-1 social-logos">
+                <i class="fab fa-google-plus-g"> </i>
+            </a>
+        </li>
+        <li class="list-inline-item">
+            <a class="btn-floating btn-li mx-1 social-logos">
+                <i class="fab fa-linkedin-in"> </i>
+            </a>
+        </li>
+        <li class="list-inline-item">
+            <a class="btn-floating btn-dribbble mx-1 social-logos">
+                <i class="fab fa-dribbble"> </i>
+            </a>
+        </li>
+    </ul>
+    <!-- Social buttons -->
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center text-white py-3">© 2020 Copyright:
+        <span>Website made by Younes Bouaziz - All rights reserved</span>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 
         {% block javascripts %}
-            <script src="{{asset('assets/js/jquery.js')}}"></script>
-            <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-            <script src="{{asset('assets/js/plugins.js')}}"></script>
-            <script src="{{asset('assets/js/init.js')}}"></script>
-
-            <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-            <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-            <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-            <![endif]-->
-
-            <script type="text/javascript">
-                $(document).ready(function() {
-                    'use strict';
-                    jQuery('#headerwrap').backstretch([
-                        "assets/img/bg/app1.jpg",
-                    ], {
-                        duration: 8000,
-                        fade: 500
-                    });
-                });
-            </script>
-
             <script src="{{asset('js/regionData.js')}}"></script> <!--Json data of Algeria's regions-->
             <script src="{{asset('js/mapConfig.js')}}"></script>
         {% endblock %}
-    </body>
+</body>
 </html>

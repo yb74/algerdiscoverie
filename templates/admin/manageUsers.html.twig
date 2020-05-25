@@ -4,62 +4,79 @@
 
 {% block body %}
 
-    <section class="dark-wrapper opaqued parallax" data-parallax="scroll" data-image-src="{{asset('assets/img/bg/bg2.jpg')}}" data-speed="0.7">
-        <div class="section-inner pad-top-200">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 mt30 wow text-center">
-                        <h2 class="section-heading">Manage users</h2>
-                    </div>
+    <header class="masthead">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 text-center bg-white">
+                    <h1 class="font-weight-light">Manage users</h1>
+                    <p class="lead">Subtile</p>
                 </div>
             </div>
         </div>
-    </section>
+    </header>
 
-    <section id="welcome">
-        <div class="section-inner nopaddingbottom">
-
-            <div class="container">
-                <div class="row header-dashboard py-5">
-                    <div class="col-md-12 text-center dashboard_menu">
-                        <h2>User list</h2>
-                        <a href="{{ path('admin') }}" class="btn btn-info btn-dashboard">Dashboard</a>
-                        <a href="{{ path('manageComments') }}" class="btn btn-info btn-dashboard">Comment list</a>
-                        <a href="{{ path('article_new') }}" class="btn btn-info btn-dashboard">Create a post</a>
-                    </div>
+    <!-- Page Content -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row header-dashboard py-5">
+                <div class="col-md-12 text-center dashboard_menu">
+                    <h2>Users</h2>
+                    <a href="{{ path('admin') }}" class="btn btn-info btn-dashboard">Dashboard</a>
+                    <a href="{{ path('manageComments') }}" class="btn btn-info btn-dashboard">Reported comments</a>
+                    <a href="{{ path('article_new') }}" class="btn btn-info btn-dashboard">Create an article</a>
+                    <a href="{{ path('pendingArticles') }}" class="btn btn-info btn-dashboard">Manage pending articles</a>
                 </div>
-
-            <div class="container">
-
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Email</th>
-                        <th>CreatedAt</th>
-{#                        <th>Picture</th>#}
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for user in users %}
-                        {% if is_granted('ROLE_USER') %}
-                        <tr>
-                            <td>{{ user.firstname }}</td>
-                            <td>{{ user.lastname }}</td>
-                            <td>{{ user.email }}</td>
-                            <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-{#                            <td><img src="{{ article.picture }}" alt="Article image"></td>#}
-                        </tr>
-                        {% endif %}
-                    {% else %}
-                        <tr>
-                            <td colspan="6">no records found</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
             </div>
+        </div>
+
+        <div class="container">
+
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table class="table table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Firstname</th>
+                        <th scope="col">Lastname</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">CreatedAt</th>
+                        <th scope="col">Delete user</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    {% if is_granted('ROLE_USER') %}
+                    <tr>
+                        <td>{{ user.firstname }}</td>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td> <a href="{{ path('delete_user', {'id': user.id }) }}" class="btn btn-danger">Delete</a></td>
+                    </tr>
+                    {% endif %}
+                {% else %}
+                    <tr>
+                        <td colspan="6">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
         </div>
     </section>
 

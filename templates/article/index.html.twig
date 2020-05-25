@@ -3,62 +3,120 @@
 {% block title %}Article index{% endblock %}
 
 {% block body %}
-    <section class="dark-wrapper opaqued parallax" data-parallax="scroll" data-image-src="{{asset('assets/img/bg/bg2.jpg')}}" data-speed="0.7">
-        <div class="section-inner pad-top-200">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12 mt30 wow text-center">
-                        <h2 class="section-heading">All articles</h2>
+
+    <header class="masthead">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 text-center bg-white">
+                    <h1 class="font-weight-light">All articles</h1>
+                    <p class="lead">Subtile</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="case">
+                        {% if is_granted('ROLE_USER') %}
+                            <a href="{{ path('article_user_new') }}" class="btn btn-info my-3">Create article</a>
+                        {% endif %}
+                        <div class="row">
+                            {% for article in articles %}
+                                <div class="col-xl-4 col-lg-6 col-md-12 card py-5 card-dashboard">
+                                    <div class="text w-100 pl-md-3 text-center">
+                                        <img src="{{ vich_uploader_asset(article,'imageFile') }}" class="img-fluid mb-3" alt="{{ article.imagename }}">
+                                        <p class="text-center">Title</p>
+                                        <h3 class="text-center">
+                                            {{ article.title }}
+                                        </h3>
+                                        <p class="text-center">Region</p>
+                                        <h3 class="text-center">
+                                            {{ article.region.name }}
+                                        </h3>
+                                        <p class="text-center">Category</p>
+                                        <h3 class="text-center">
+                                            {{ article.category.name }}
+                                        </h3>
+                                        <p class="text-center">Number of comments</p>
+                                        <h3 class="text-center">
+                                            {{ article.comments | length }}
+                                        </h3>
+                                        <p class="text-center">Creation date</p>
+                                        <h3 class="text-center">
+                                            {{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}
+                                        </h3>
+                                        <br>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{ path('article_show', {'id': article.id}) }}" class="btn btn-info mx-2 display-button">Read more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="welcome">
-        <div class="section-inner nopaddingbottom">
 
-            <div class="container">
-                <h1>Article index</h1>
 
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Region</th>
-                            <th>Category</th>
-                            <th>Number of comments</th>
-                            <th>Title</th>
-                            <th>Content</th>
-                            <th>CreatedAt</th>
-                            <th>Picture</th>
-                            <th>actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for article in articles %}
-                        <tr>
-                            <td>{{ article.region.name }}</td>
-                            <td>{{ article.category.name }}</td>
-                            <td>{{ article.comments | length }}</td>
-                            <td>{{ article.title }}</td>
-                            <td>{{ article.content }}</td>
-                            <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                            <td><img src="{{ vich_uploader_asset(article,'imageFile')|imagine_filter('echelle') }}" alt="{{ article.imagename }}"></td>
-                            <td>
-                                <a href="{{ path('article_show', {'id': article.id}) }}">show</a>
-                                {% if is_granted('ROLE_ADMIN') %}
-                                <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>
-                                {% endif %}
-                            </td>
-                        </tr>
-                    {% else %}
-                        <tr>
-                            <td colspan="6">no records found</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
+{#            <h1>Article index</h1>#}
+
+{#            <table class="table">#}
+{#                <thead>#}
+{#                <tr>#}
+{#                    <th>Region</th>#}
+{#                    <th>Category</th>#}
+{#                    <th>Number of comments</th>#}
+{#                    <th>Title</th>#}
+{#                    <th>Content</th>#}
+{#                    <th>CreatedAt</th>#}
+{#                    <th>Picture</th>#}
+{#                    <th>actions</th>#}
+{#                </tr>#}
+{#                </thead>#}
+{#                <tbody>#}
+{#                {% if not is_granted('ROLE_ADMIN') %}#}
+{#                    <a href="{{ path('article_user_new') }}" class="btn btn-info">Create article</a>#}
+{#                {% endif %}#}
+{#                {% for article in articles %}#}
+{#                    {% if article.published == true %}#}
+{#                        <tr>#}
+{#                            <td>{{ article.region.name }}</td>#}
+{#                            <td>{{ article.category.name }}</td>#}
+{#                            <td>{{ article.comments | length }}</td>#}
+{#                            <td>{{ article.title }}</td>#}
+{#                            <td>{{ article.content }}</td>#}
+{#                            <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>#}
+{#                            <td><img src="{{ vich_uploader_asset(article,'imageFile') }}" alt="{{ article.imagename }}"></td>#}
+{#                            <td>#}
+{#                                <a href="{{ path('article_show', {'id': article.id}) }}">show</a>#}
+{#                                {% if is_granted('ROLE_ADMIN') %}#}
+{#                                    <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>#}
+{#                                {% endif %}#}
+{#                                <a href="{{ path('article_like', {'id' : article.id}) }}" class="btn btn-link js-like">#}
+{#                                    {% if app.user and article.isLikedByUser(app.user) %}#}
+{#                                        <i class="fas fa-thumbs-up"></i>#}
+{#                                    {% else %}#}
+{#                                        <i class="far fa-thumbs-up"></i>#}
+{#                                    {% endif %}#}
+{#                                    <span class="js-likes">{{ article.likes | length }}</span>#}
+{#                                    <span class="js-label">Like</span>#}
+{#                                </a>#}
+{#                            </td>#}
+{#                        </tr>#}
+{#                    {% endif %}#}
+{#                {% else %}#}
+{#                    <tr>#}
+{#                        <td colspan="6">no records found</td>#}
+{#                    </tr>#}
+{#                {% endfor %}#}
+{#                </tbody>#}
+{#            </table>#}
+
 {% endblock %}

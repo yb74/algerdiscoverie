@@ -2,7 +2,7 @@
 
 {% block title %}Create Article{% endblock %}
 
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% form_theme userArticleForm 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
 
@@ -22,7 +22,10 @@
         <div class="container">
             <h1>Create new Article</h1>
 
-            {{ include('article/_form.html.twig') }}
+            {{ form_start(userArticleForm) }}
+            {{ form_widget(userArticleForm) }}
+            <button class="btn btn-primary">{{ button_label|default('Submit') }}</button>
+            {{ form_end(userArticleForm) }}
 
         </div>
     </section>
@@ -30,12 +33,12 @@
 {% endblock %}
 
 {% block javascripts %}
-<script>
-    $('.custom-file-input').on('change', function (e) {
-        let inputFile = e.currentTarget;
-        $(inputFile).parent()
-        .find('.custom-file-label')
-        .html(inputFile.files[0].name);
-    });
-</script>
+    <script>
+        $('.custom-file-input').on('change', function (e) {
+            let inputFile = e.currentTarget;
+            $(inputFile).parent()
+                .find('.custom-file-label')
+                .html(inputFile.files[0].name);
+        });
+    </script>
 {% endblock %}

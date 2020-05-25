@@ -4,6 +4,8 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -15,8 +17,16 @@ class RegistrationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
-            ->add('firstname')
+            ->add('username', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'Username',
+                ]
+            ])
+            ->add('firstname', TextType::class, [
+                'attr' => [
+                    'placeholder' => 'firstname',
+                ]
+            ])
             ->add('lastname', null, [
                 'required'   => false,
                 'empty_data' => 'Anonymous',
@@ -24,20 +34,29 @@ class RegistrationType extends AbstractType
                     'placeholder' => 'No mandatory',
                 ]
             ])
-            ->add('email')
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'required' => true,
-                'first_options' => ['label' => 'Password'],
-                'second_options' => ['label' => 'Confirm Password']
-            ])
-            ->add('register', SubmitType::class, [
+            ->add('email', EmailType::class, [
                 'attr' => [
-                    'class' => 'btn btn-primary'
-//                    'class' => 'btn btn-primary float-right'
+                    'placeholder' => 'email',
                 ]
             ])
-            ;
+            ->add('password', RepeatedType::class, [
+                'attr' => [
+                    'type' => PasswordType::class,
+                    'required' => true,
+                ],
+                'first_options' => [
+                    'label' => 'Password',
+                    'attr' => [
+                    'placeholder' => 'Your password',
+                    ]
+                ],
+                'second_options' => [
+                    'label' => 'Confirm Password',
+                    'attr' => [
+                    'placeholder' => 'Confirm your password',
+                    ]
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
