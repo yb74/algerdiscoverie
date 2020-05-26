@@ -38,6 +38,11 @@ class Region
      */
     private $articles;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ref;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -111,6 +116,18 @@ class Region
                 $article->setRegion(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRef(): ?string
+    {
+        return $this->ref;
+    }
+
+    public function setRef(string $ref): self
+    {
+        $this->ref = $ref;
 
         return $this;
     }

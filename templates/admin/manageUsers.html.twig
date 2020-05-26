@@ -60,7 +60,7 @@
                 </thead>
                 <tbody>
                 {% for user in users %}
-                    {% if is_granted('ROLE_USER') %}
+                    {% if user.roles[0] == 'ROLE_USER' %}
                     <tr>
                         <td>{{ user.firstname }}</td>
                         <td>{{ user.lastname }}</td>

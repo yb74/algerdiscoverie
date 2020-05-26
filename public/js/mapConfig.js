@@ -1,53 +1,63 @@
 class Map {
     constructor() {
         this.map = am4core.create("chartdiv", am4maps.MapChart); // creating map in the chartdiv
-        this.map.geodata = am4geodata_algeriaHigh; // getting data of Algeria map
+
+        try {
+            this.map.geodata = am4geodata_algeriaHigh; // getting data of Algeria map
+        }
+        catch (e) {
+            this.map.raiseCriticalError({
+                "message": "Map geodata could not be loaded. Please download the latest <a href=\"https://www.amcharts.com/download/download-v4/\">amcharts geodata</a> and extract its contents into the same directory as your amCharts files."
+            });
+        }
+
         this.map.geodataSource.url = "js/regionData.js"; // getting json data of the regions
         this.map.projection = new am4maps.projections.Miller();
         this.polygonSeries = new am4maps.MapPolygonSeries(); // instantiation of polygon series (article polygons)
+        this.theme = am4core.useTheme(am4themes_animated); // set themes
         // Configure series (polygon series)
         this.polygonTemplate = this.polygonSeries.mapPolygons.template;
 
         // events
         // this.getLatLngOnclick(); // get latitude and longitude onclick on map
-        // this.showRegionInfoOnhover(); // setEvents on hover on regions
-
+        this.showRegionInfo(); // setEvents on hover on regions
         this.configMap();
-
-        this.settingImageSeries();
+        this.unzoom();
 
         // this.displayPopup(); // adding popup
         // this.displayModal(); // adding modal
 
-        this.getRegion();
+        // this.getRegion();
     }
 
-    getRegion() {
-        this.polygonTemplate.events.on("hit", ev => {
-
-            fetch('/map/info')
-                .then(response => response.json())
-                .then(regions => regions.forEach((region) => {
-                    let regionData = {
-                        coords: region.coords,
-                        name: region.name,
-                        description: region.description
-                    };
-                    // console.log(regionData);
-                        console.log(regionData.name);
-
-                        let html = "";
-
-                        html += "<tr>";
-                        html += "<td>" + region.coords + "</td>";
-                        html += "<td>" + region.name + "</td>";
-                        html += "<td>" + region.description + "</td>";
-                        html += "</tr>";
-                        document.getElementById("data").innerHTML += html;
-                }))
-                .catch(error => console.log('Error', error));
-        });
-    }
+    // getRegion() {
+    //     this.polygonTemplate.events.on("hit", ev => {
+    //
+    //         fetch('/map/info')
+    //             .then(response => response.json())
+    //             .then(regions => regions.forEach((region) => {
+    //                 let regionData = {
+    //                     ref: region.ref,
+    //                     coords: region.coords,
+    //                     name: region.name,
+    //                     description: region.description
+    //                 };
+    //                 // console.log(regionData);
+    //                     console.log(regionData.name);
+    //
+    //                     let html = "";
+    //
+    //                     html += "<tr>";
+    //                     html += "<td>" + region.ref + "</td>";
+    //                     html += "<td>" + region.coords + "</td>";
+    //                     html += "<td>" + region.name + "</td>";
+    //                     html += "<td>" + region.description + "</td>";
+    //                     html += "</tr>";
+    //                     document.getElementById("region_info").innerHTML += html;
+    //             }))
+    //             .catch(error => console.log('Error', error));
+    //     });
+    // }
 
     configMap() {
         this.polygonSeries.useGeodata = true;
@@ -63,6 +73,10 @@ class Map {
         this.map.zoomControl = new am4maps.ZoomControl();
         // zoom control bar height
         this.map.zoomControl.slider.height = 100;
+        // Zoom control bar vertical position
+        this.map.zoomControl.valign= top;
+        this.map.zoomControl.align= "left";
+        console.log(this.map.zoomControl);
 
         // adding small map
         this.map.smallMap = new am4maps.SmallMap();
@@ -75,25 +89,48 @@ class Map {
         // Create hover state and set alternative fill color
         let hs = this.polygonTemplate.states.create("hover");
         hs.properties.fill = am4core.color("#367B25");
+
+        // Configure "active" state
+        // let colorSet = new am4core.ColorSet();
+        let activeState = this.polygonTemplate.states.create("active");
+        activeState.properties.fill = am4core.color("#ff0000");
     }
 
-    // showRegionInfoOnhover() {
-    //     // setEvents on hover on regions
-    //     this.polygonClickEv = this.polygonTemplate.events.on("over", ev => {
-    //         let regionName = document.getElementById("article-1");
-    //         // regionName.textContent= ev.target.dataItem.dataContext.name;
-    //         let data = ev.target.dataItem.dataContext;
-    //         let info = document.getElementById("region_info");
-    //         info.innerHTML = "<h3>" + data.name + " (" + data.id + ")</h3>";
-    //         if (data.description) {
-    //             info.innerHTML += data.description;
-    //         } else {
-    //             info.innerHTML += "<i>No description provided.</i>"
-    //         }
-    //         // zoom to an object
-    //         // ev.target.series.chart.zoomToMapObject(ev.target);
-    //     });
-    // }
+    showRegionInfo() {
+        // setEvents on click on regions
+        this.polygonClickEv = this.polygonTemplate.events.on("hit", ev => {
+            let regionName = document.getElementById("article-1");
+            // regionName.textContent= ev.target.dataItem.dataContext.name;
+            let data = ev.target.dataItem.dataContext;
+            let info = document.getElementById("region_info");
+            info.innerHTML = "<h3>" + data.name + " (" + data.id + ")</h3>";
+            // if (data.description) {
+            //     info.innerHTML += data.description;
+            // } else {
+            //     info.innerHTML += "<i>No description provided.</i>"
+            // }
+
+            // zoom to an object and unzoom on double click
+            ev.target.series.chart.zoomToMapObject(ev.target);
+        });
+    }
+
+    unzoom() {
+        let button = this.map.chartContainer.createChild(am4core.Button);
+        button.padding(5, 5, 5, 5);
+        button.align = "right";
+        button.marginRight = 15;
+        // button.height = 50;
+        console.log(button);
+        button.events.on("hit", () => {
+            this.map.goHome();
+        });
+        button.icon = new am4core.Sprite();
+        button.icon.path = "M45.6,0.5 C20.7,0.5 0.5,20.7 0.5,45.6 C0.5,70.5 20.7,90.7 45.6,90.7 C56.6,90.7 66.6,86.8 74.5,80.2 L109.6,115.3 C110.4,116.1 111.4,116.5 112.5,116.5 C113.5,116.5 114.6,116.1 115.4,115.3 C117,113.7 117,111.1 115.4,109.5 L80.3,74.5 C86.8,66.7 90.8,56.6 90.8,45.6 C90.7,20.7 70.5,0.5 45.6,0.5 Z M45.6,82.6 C25.2,82.6 8.6,66 8.6,45.6 C8.6,25.2 25.2,8.6 45.6,8.6 C66,8.6 82.6,25.2 82.6,45.6 C82.6,66 66,82.6 45.6,82.6 Z";
+
+        // home icon :
+        // button.icon.path = "M16,8 L14,8 L14,16 L10,16 L10,10 L6,10 L6,16 L2,16 L2,8 L0,8 L8,0 L16,8 Z M16,8";
+    }
 
     // displayPopup() {
     //     this.polygonTemplate.events.on("hit", ev => {
@@ -169,26 +206,6 @@ class Map {
     //         //console.log(this.map.svgPointToGeo(ev.svgPoint));
     //     });
     // }
-
-    settingImageSeries() {
-        // // Prepare a MapImageSeries
-        let imageSeries = this.map.series.push(new am4maps.MapImageSeries());
-        let mapImage = imageSeries.mapImages.template;
-        let mapMarker = mapImage.createChild(am4core.Sprite);
-        mapMarker.path = "M4 12 A12 12 0 0 1 28 12 C28 20, 16 32, 16 32 C16 32, 4 20 4 12 M11 12 A5 5 0 0 0 21 12 A5 5 0 0 0 11 12 Z";
-        mapMarker.width = 32;
-        mapMarker.height = 32;
-        mapMarker.scale = 0.7;
-        mapMarker.fill = am4core.color("#3F4B3B");
-        mapMarker.fillOpacity = 0.8;
-        mapMarker.horizontalCenter = "middle";
-        mapMarker.verticalCenter = "bottom";
-
-        // console.log(imageSeries);
-    }
-
-    // let france = polygonSeries.getPolygonById("FR");
-    // france.isHover = true;
 }
 
 const map = new Map();
@@ -206,60 +223,3 @@ const map = new Map();
 //         console.log(`Current temperature in ${apiResponse.location.name} is ${apiResponse.current.temperature}℃`);
 //     }
 // });
-
-
-
-
-
-
-//
-// // map.series.events.on("over", over);
-// // map.series.events.on("out", out);
-// //
-// // function over(ev) {
-// //     ev.target.mapPolygons.each(function(polygon) {
-// //         polygon.setState("highlight");
-// //         polygonTemplate.tooltipText = "{series.name}: [bold]{name}[/]";
-// //         //regionName.style.color = "red";
-// //     });
-// // }
-// //
-// // function out(ev) {
-// //     ev.target.mapPolygons.each(function(polygon) {
-// //         polygon.setState("default");
-// //         polygonTemplate.tooltipText = "{series.name}";
-// //         //regionName.style.color = "black";
-// //     });
-// // }
-//
-// var regionListName = document.getElementById("article-1");
-//
-// // function over(ev) {
-// //     ev.target.mapPolygons.each(function(polygon) {
-// //         // ici tu mets ton changement de couleur de ton texte a droite >>>
-// //         // regionListName.style.color = "red";
-// //         alert("hello");
-// //     });
-// // }
-//
-// let regionName = document.getElementById("article-1");
-// // polygonTemplate.tooltipText = "{series.name}: [bold]{name}[/]";
-
-// // map.series.events.on("over", over);
-// // map.series.events.on("out", out);
-// //
-// // function over(ev) {
-// //     ev.target.mapPolygons.each(function(polygon) {
-// //         polygon.setState("highlight");
-// //         polygonTemplate.tooltipText = "{series.name}: [bold]{name}[/]";
-// //         //regionName.style.color = "red";
-// //     });
-// // }
-// //
-// // function out(ev) {
-// //     ev.target.mapPolygons.each(function(polygon) {
-// //         polygon.setState("default");
-// //         polygonTemplate.tooltipText = "{series.name}";
-// //         //regionName.style.color = "black";
-// //     });
-// }

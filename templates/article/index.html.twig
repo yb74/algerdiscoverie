@@ -22,7 +22,8 @@
                 <div class="col-md-12">
                     <div class="case">
                         {% if is_granted('ROLE_USER') %}
-                            <a href="{{ path('article_user_new') }}" class="btn btn-info my-3">Create article</a>
+                            <a href="{{ path('article_user_new') }}" class="btn btn-info my-3">Create
+                                article</a>
                         {% endif %}
                         <div class="row">
                             {% for article in articles %}
