@@ -18,7 +18,7 @@ class ArticleType extends AbstractType
     {
         $builder
             ->add('title')
-            ->add('content', TextareaType::class, /*[
+            ->add('content', TextareaType::class /*[
                 'attr' => [
                     'class' => 'tinyForm',
                     'data-theme' => 'medium' // simple, advanced, bbcode

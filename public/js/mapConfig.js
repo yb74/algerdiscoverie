@@ -18,11 +18,9 @@ class Map {
         // Configure series (polygon series)
         this.polygonTemplate = this.polygonSeries.mapPolygons.template;
 
-        // events
-        // this.getLatLngOnclick(); // get latitude and longitude onclick on map
-        this.showRegionInfo(); // setEvents on hover on regions
+        this.showRegionInfo();
         this.configMap();
-        this.zoomout();
+        this.zoomControl();
 
         // this.displayPopup(); // adding popup
         // this.displayModal(); // adding modal
@@ -69,29 +67,16 @@ class Map {
         this.polygonTemplate.tooltipText = "{name}";
         this.polygonTemplate.fill = am4core.color("#74B266"); // polygon color
 
-        //adding chart zoom control
-        this.map.zoomControl = new am4maps.ZoomControl();
-        // zoom control bar height
-        this.map.zoomControl.slider.height = 100;
-        // Zoom control bar vertical position
-        this.map.zoomControl.valign= top;
-        this.map.zoomControl.align= "left";
-        console.log(this.map.zoomControl);
-
-        // adding small map
-        this.map.smallMap = new am4maps.SmallMap();
-        this.map.smallMap.series.push(this.polygonSeries);
-
         // map background color
         this.map.background.fill = am4core.color("#aadaff");
         this.map.background.fillOpacity = 1;
 
         // mobile scroll/drag grip config
         this.map.dragGrip.position = "left"; // position
-        this.map.dragGrip.height = am4core.percent(50); // height
+        this.map.dragGrip.height = am4core.percent(70); // height
         this.map.dragGrip.autoHideDelay = 5000; // delay before hiding (set to 0 to disable hiding)
         // grip background style
-        this.map.dragGrip.background.fill = am4core.color("#5f9");
+        this.map.dragGrip.background.fill = am4core.color("lightgrey");
         this.map.dragGrip.background.fillOpacity = 0.8;
         this.map.dragGrip.background.cornerRadius(0, 0, 0, 0);
         // icon color
@@ -99,7 +84,7 @@ class Map {
         // adding a shadow
         this.map.dragGrip.background.strokeWidth = 0;
         this.map.dragGrip.background.fillOpacity = 1;
-        this.map.dragGrip.marginRight = 10;
+        // this.map.dragGrip.marginRight = 10;
         this.map.dragGrip.filters.push(new am4core.DropShadowFilter);
     }
 
@@ -111,24 +96,19 @@ class Map {
         // Set events to apply "active" state to clicked polygons
         let currentActive;
 
-        // Create hover state and set alternative fill color
-        // let hs = this.polygonTemplate.states.create("hover");
-        // hs.properties.fill = am4core.color("#367B25");
-        // Configure "active" state
         let activeState = this.polygonTemplate.states.create("active");
         activeState.properties.fill = am4core.color("#cc3300");
 
         // setEvents on click on regions
         this.polygonClickEv = this.polygonTemplate.events.on("hit", ev => {
-            let regionName = document.getElementById("article-1");
-            // regionName.textContent= ev.target.dataItem.dataContext.name;
             let data = ev.target.dataItem.dataContext;
             let info = document.getElementById("region_info");
             info.innerHTML = "<h3>" + data.name + " (" + data.id + ")</h3>";
 
-            // Scroll to a certain element
+            // setting parameters for smartphone and tabs
             let winmed = window.matchMedia("(max-width: 985px)");
             if (winmed.matches){
+                // Scroll to region info
                 document.querySelector('#region_info').scrollIntoView({
                     behavior: 'smooth'
                 });
@@ -151,21 +131,32 @@ class Map {
         });
     }
 
-    zoomout() {
+    zoomControl() {
+        //adding chart zoom control
+        this.map.zoomControl = new am4maps.ZoomControl();
+        // zoom control bar height
+        this.map.zoomControl.slider.height = 100;
+        // Zoom control bar vertical position
+        this.map.zoomControl.valign= top;
+        this.map.zoomControl.align= "left";
+
         let zoomoutBtn = this.map.chartContainer.createChild(am4core.Button);
         zoomoutBtn.padding(5, 5, 5, 5);
         zoomoutBtn.align = "right";
         zoomoutBtn.marginRight = 15;
-
-        // unzoomButton.icon = new am4core.Sprite();
-        // // home icon :
-        // unzoomButton.icon.path = "M16,8 L14,8 L14,16 L10,16 L10,10 L6,10 L6,16 L2,16 L2,8 L0,8 L8,0 L16,8 Z M16,8";
 
         zoomoutBtn.label.text = "Zoom out";
         zoomoutBtn.align = "right";
         zoomoutBtn.events.on("hit", () => {
             this.map.goHome();
         });
+
+        // setting zoom buttons position for smartphone and tabs
+        let winmed = window.matchMedia("(max-width: 985px)");
+        if (winmed.matches) {
+            zoomoutBtn.valign = "middle";
+            this.map.zoomControl.align= "right";
+        }
     }
 
     // displayPopup() {
@@ -234,12 +225,6 @@ class Map {
     //         this.map.modal.events.on("closed", ev => {
     //             // console.log(ev);
     //         });
-    //     });
-    // }
-
-    // getLatLngOnclick() {
-    //     this.map.seriesContainer.events.on("hit", ev => {
-    //         //console.log(this.map.svgPointToGeo(ev.svgPoint));
     //     });
     // }
 }
