@@ -35,6 +35,10 @@
     position: absolute;
 }
 
+path:hover {
+    cursor: pointer;
+}
+
 .amcharts-ampopup {
     overflow: visible;
     position: absolute;
@@ -138,4 +142,9 @@ footer a:hover {
     .btn-dashboard {
         margin: 10px 0;
     }
+
+    /*.map-container {*/
+    /*    display: flex;*/
+    /*    flex-direction: column;*/
+    /*}*/
 }

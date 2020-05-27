@@ -22,7 +22,7 @@ class Map {
         // this.getLatLngOnclick(); // get latitude and longitude onclick on map
         this.showRegionInfo(); // setEvents on hover on regions
         this.configMap();
-        this.unzoom();
+        this.zoomout();
 
         // this.displayPopup(); // adding popup
         // this.displayModal(); // adding modal
@@ -86,17 +86,38 @@ class Map {
         this.map.background.fill = am4core.color("#aadaff");
         this.map.background.fillOpacity = 1;
 
-        // Create hover state and set alternative fill color
-        let hs = this.polygonTemplate.states.create("hover");
-        hs.properties.fill = am4core.color("#367B25");
-
-        // Configure "active" state
-        // let colorSet = new am4core.ColorSet();
-        let activeState = this.polygonTemplate.states.create("active");
-        activeState.properties.fill = am4core.color("#ff0000");
+        // mobile scroll/drag grip config
+        this.map.dragGrip.position = "left"; // position
+        this.map.dragGrip.height = am4core.percent(50); // height
+        this.map.dragGrip.autoHideDelay = 5000; // delay before hiding (set to 0 to disable hiding)
+        // grip background style
+        this.map.dragGrip.background.fill = am4core.color("#5f9");
+        this.map.dragGrip.background.fillOpacity = 0.8;
+        this.map.dragGrip.background.cornerRadius(0, 0, 0, 0);
+        // icon color
+        this.map.dragGrip.icon.stroke = am4core.color("#fff");
+        // adding a shadow
+        this.map.dragGrip.background.strokeWidth = 0;
+        this.map.dragGrip.background.fillOpacity = 1;
+        this.map.dragGrip.marginRight = 10;
+        this.map.dragGrip.filters.push(new am4core.DropShadowFilter);
     }
 
     showRegionInfo() {
+        let colorSet = new am4core.ColorSet();
+        // Configure polygons
+        let polygonTemplate = this.polygonSeries.mapPolygons.template;
+        polygonTemplate.togglable = true;
+        // Set events to apply "active" state to clicked polygons
+        let currentActive;
+
+        // Create hover state and set alternative fill color
+        // let hs = this.polygonTemplate.states.create("hover");
+        // hs.properties.fill = am4core.color("#367B25");
+        // Configure "active" state
+        let activeState = this.polygonTemplate.states.create("active");
+        activeState.properties.fill = am4core.color("#cc3300");
+
         // setEvents on click on regions
         this.polygonClickEv = this.polygonTemplate.events.on("hit", ev => {
             let regionName = document.getElementById("article-1");
@@ -104,32 +125,47 @@ class Map {
             let data = ev.target.dataItem.dataContext;
             let info = document.getElementById("region_info");
             info.innerHTML = "<h3>" + data.name + " (" + data.id + ")</h3>";
-            // if (data.description) {
-            //     info.innerHTML += data.description;
-            // } else {
-            //     info.innerHTML += "<i>No description provided.</i>"
-            // }
 
-            // zoom to an object and unzoom on double click
-            ev.target.series.chart.zoomToMapObject(ev.target);
+            // Scroll to a certain element
+            let winmed = window.matchMedia("(max-width: 985px)");
+            if (winmed.matches){
+                document.querySelector('#region_info').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+
+            if (data.description) {
+                info.innerHTML += data.description;
+            } else {
+                info.innerHTML += "<i>No description provided.</i>"
+            }
+
+            // if we have some country selected, set default state to it
+            if (currentActive) {
+                currentActive.setState("default");
+            }
+
+            // zoom to an object on on click
+            this.map.zoomToMapObject(ev.target);
+            currentActive = ev.target;
         });
     }
 
-    unzoom() {
-        let button = this.map.chartContainer.createChild(am4core.Button);
-        button.padding(5, 5, 5, 5);
-        button.align = "right";
-        button.marginRight = 15;
-        // button.height = 50;
-        console.log(button);
-        button.events.on("hit", () => {
+    zoomout() {
+        let zoomoutBtn = this.map.chartContainer.createChild(am4core.Button);
+        zoomoutBtn.padding(5, 5, 5, 5);
+        zoomoutBtn.align = "right";
+        zoomoutBtn.marginRight = 15;
+
+        // unzoomButton.icon = new am4core.Sprite();
+        // // home icon :
+        // unzoomButton.icon.path = "M16,8 L14,8 L14,16 L10,16 L10,10 L6,10 L6,16 L2,16 L2,8 L0,8 L8,0 L16,8 Z M16,8";
+
+        zoomoutBtn.label.text = "Zoom out";
+        zoomoutBtn.align = "right";
+        zoomoutBtn.events.on("hit", () => {
             this.map.goHome();
         });
-        button.icon = new am4core.Sprite();
-        button.icon.path = "M45.6,0.5 C20.7,0.5 0.5,20.7 0.5,45.6 C0.5,70.5 20.7,90.7 45.6,90.7 C56.6,90.7 66.6,86.8 74.5,80.2 L109.6,115.3 C110.4,116.1 111.4,116.5 112.5,116.5 C113.5,116.5 114.6,116.1 115.4,115.3 C117,113.7 117,111.1 115.4,109.5 L80.3,74.5 C86.8,66.7 90.8,56.6 90.8,45.6 C90.7,20.7 70.5,0.5 45.6,0.5 Z M45.6,82.6 C25.2,82.6 8.6,66 8.6,45.6 C8.6,25.2 25.2,8.6 45.6,8.6 C66,8.6 82.6,25.2 82.6,45.6 C82.6,66 66,82.6 45.6,82.6 Z";
-
-        // home icon :
-        // button.icon.path = "M16,8 L14,8 L14,16 L10,16 L10,10 L6,10 L6,16 L2,16 L2,8 L0,8 L8,0 L16,8 Z M16,8";
     }
 
     // displayPopup() {
