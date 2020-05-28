@@ -32,17 +32,18 @@
                     <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
                     <li data-target="#carousel-example-2" data-slide-to="1"></li>
                     <li data-target="#carousel-example-2" data-slide-to="2"></li>
+                    <li data-target="#carousel-example-2" data-slide-to="3"></li>
                 </ol>
                 <!--/.Indicators-->
                 <!--Slides-->
                 <div class="carousel-inner" role="listbox">
                     <div class="carousel-item active">
                         <div class="view">
-                            <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(68).jpg"
+                            <img class="d-block w-100" src="{{ asset('/img/slider/slide1.png') }}"
                                  alt="First slide">
                             <div class="mask rgba-black-light"></div>
                         </div>
-                        <div class="carousel-caption">
+                        <div class="carousel-caption bg-dark">
                             <h3 class="h3-responsive">Interactive map</h3>
                             <p> Browse the map to discover the regions of Algeria and their main information.</p>
                             <a href= "{{ path('map') }}" class="btn btn-primary">To the map</a>

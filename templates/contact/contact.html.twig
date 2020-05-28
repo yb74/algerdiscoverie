@@ -2,6 +2,8 @@
 
 {% block title %}Contact{% endblock %}
 
+{% form_theme contactForm 'bootstrap_4_layout.html.twig' %}
+
 {% block body %}
 
     <header class="masthead">
@@ -15,28 +17,29 @@
         </div>
     </header>
 
-    <!-- Page Content -->
     <section class="py-5">
         <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="lead">Sold old ten are quit lose deal his sent. You correct how sex several far distant believe journey parties. We shyness enquire uncivil affixed it carried to. </p>
-                    <p>End sitting shewing who saw besides son musical adapted. Contrasted interested eat alteration pianoforte sympathize was. He families believed if no elegance interest surprise an. It abode wrong miles an so delay plate.</p>
-                    <p class="mt30"><a href="#contact" class="btn btn-primary btn-theme page-scroll">Get In Touch</a></p>
-                </div>
+            <h1>Contact us</h1>
 
-                <div class="col-md-6">
-                    <div id="message"></div>
-                    <form method="post" action="#" id="contactform" class="main-contact-form wow">
-                        <input type="text" class="form-control col-md-4" name="name" placeholder="Your Name *" id="name" required data-validation-required-message="Please enter your name." />
-                        <input type="text" class="form-control col-md-4" name="email" placeholder="Your Email *" id="email" required data-validation-required-message="Please enter your email address." />
-                        <input type="text" class="form-control col-md-4" name="website" placeholder="Your URL *" id="website" required data-validation-required-message="Please enter your web address." />
-                        <textarea name="comments" class="form-control" id="comments" placeholder="Your Message *" required data-validation-required-message="Please enter a message."></textarea>
-                        <input class="btn btn-primary mt30 btn-white pull-right" type="submit" name="submit" value="Submit" />
-                    </form>
-                </div>
-            </div>
+            {{ form_start(contactForm) }}
+
+            {{ form_widget(contactForm) }}
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+            {{ form_end(contactForm) }}
         </div>
     </section>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $('.custom-file-input').on('change', function (e) {
+            let inputFile = e.currentTarget;
+            $(inputFile).parent()
+                .find('.custom-file-label')
+                .html(inputFile.files[0].name);
+        });
+    </script>
 {% endblock %}
