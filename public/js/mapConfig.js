@@ -231,16 +231,19 @@ class Map {
 
 const map = new Map();
 
-
+// Algeria lat/lng 28.0339° N, 1.6596° E
 
 // $.ajax({
-//     url: 'https://api.weatherstack.com/current',
-//     data: {
-//         access_key: '96b88531510bd8aee983a22e34037d83',
-//         query: 'New York'
-//     },
+//     url: 'https://api.openweathermap.org/data/2.5/onecall?lat={28.0339}&lon={1.6596}&exclude={part}&appid={300514692dfa77f36da12226a3fd16ab}',
+//     type : 'GET',
+//     // data: {
+//     //     access_key: '300514692dfa77f36da12226a3fd16ab',
+//     //     query: 'New York'
+//     // },
+//
 //     dataType: 'json',
 //     success: function(apiResponse) {
-//         console.log(`Current temperature in ${apiResponse.location.name} is ${apiResponse.current.temperature}℃`);
+//         // console.log(`Current temperature in ${apiResponse.weather.name} is ${apiResponse.current.temperature}℃`);
+//         console.log(apiResponse);
 //     }
 // });

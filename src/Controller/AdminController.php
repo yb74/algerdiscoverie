@@ -8,6 +8,7 @@ use App\Entity\User;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
 use App\Repository\UserRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,20 +19,36 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin", name="admin")
      */
-    public function index(ArticleRepository $articleRepository): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
+        $data = $this->getDoctrine()->getRepository(Article::class)->findBy([], ['createdAt' => 'desc']);
+
+        $articles = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1), // number of current page, 1 by default
+            6
+        );
+
         return $this->render('admin/admin.html.twig', [
-            'articles' => $articleRepository->findAll(),
+            'articles' => $articles,
         ]);
     }
 
     /**
      * @Route("/admin/pendingArticles", name="pendingArticles")
      */
-    public function manageArticles(ArticleRepository $articleRepository): Response
+    public function manageArticles(Request $request, PaginatorInterface $paginator): Response
     {
+        $data = $this->getDoctrine()->getRepository(Article::class)->findBy(['published' => false]);
+
+        $articles = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1), // number of current page, 1 by default
+            3
+        );
+
         return $this->render('admin/pendingArticles.html.twig', [
-            'articles' => $articleRepository->findBy(['published' => false]),
+            'articles' => $articles,
         ]);
     }
 
@@ -51,10 +68,18 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/manageUsers", name="manageUsers")
      */
-    public function DisplayUsers(UserRepository $userRepository): Response
+    public function DisplayUsers(Request $request, PaginatorInterface $paginator): Response
     {
+        $data = $this->getDoctrine()->getRepository(User::class)->findBy([], ['CreatedAt' => 'desc']);
+
+        $users = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1), // number of current page, 1 by default
+            3
+        );
+
         return $this->render('admin/manageUsers.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $users,
         ]);
     }
 
@@ -73,10 +98,18 @@ class AdminController extends AbstractController
     /**
      * @Route("/admin/manageComments", name="manageComments")
      */
-    public function DisplayComments(CommentRepository $commentRepository): Response
+    public function DisplayComments(Request $request, PaginatorInterface $paginator): Response
     {
+        $data = $this->getDoctrine()->getRepository(Comment::class)->findBy([], ['reported' => 'desc']);
+
+        $comments = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1), // number of current page, 1 by default
+            3
+        );
+
         return $this->render('admin/manageComments.html.twig', [
-            'comments' => $commentRepository->findAll(),
+            'comments' => $comments,
         ]);
     }
 

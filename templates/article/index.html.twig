@@ -62,62 +62,7 @@
                 </div>
             </div>
         </div>
+        {{ knp_pagination_render(articles) }}
     </section>
-
-
-
-{#            <h1>Article index</h1>#}
-
-{#            <table class="table">#}
-{#                <thead>#}
-{#                <tr>#}
-{#                    <th>Region</th>#}
-{#                    <th>Category</th>#}
-{#                    <th>Number of comments</th>#}
-{#                    <th>Title</th>#}
-{#                    <th>Content</th>#}
-{#                    <th>CreatedAt</th>#}
-{#                    <th>Picture</th>#}
-{#                    <th>actions</th>#}
-{#                </tr>#}
-{#                </thead>#}
-{#                <tbody>#}
-{#                {% if not is_granted('ROLE_ADMIN') %}#}
-{#                    <a href="{{ path('article_user_new') }}" class="btn btn-info">Create article</a>#}
-{#                {% endif %}#}
-{#                {% for article in articles %}#}
-{#                    {% if article.published == true %}#}
-{#                        <tr>#}
-{#                            <td>{{ article.region.name }}</td>#}
-{#                            <td>{{ article.category.name }}</td>#}
-{#                            <td>{{ article.comments | length }}</td>#}
-{#                            <td>{{ article.title }}</td>#}
-{#                            <td>{{ article.content }}</td>#}
-{#                            <td>{{ article.createdAt ? article.createdAt|date('Y-m-d H:i:s') : '' }}</td>#}
-{#                            <td><img src="{{ vich_uploader_asset(article,'imageFile') }}" alt="{{ article.imagename }}"></td>#}
-{#                            <td>#}
-{#                                <a href="{{ path('article_show', {'id': article.id}) }}">show</a>#}
-{#                                {% if is_granted('ROLE_ADMIN') %}#}
-{#                                    <a href="{{ path('article_edit', {'id': article.id}) }}">edit</a>#}
-{#                                {% endif %}#}
-{#                                <a href="{{ path('article_like', {'id' : article.id}) }}" class="btn btn-link js-like">#}
-{#                                    {% if app.user and article.isLikedByUser(app.user) %}#}
-{#                                        <i class="fas fa-thumbs-up"></i>#}
-{#                                    {% else %}#}
-{#                                        <i class="far fa-thumbs-up"></i>#}
-{#                                    {% endif %}#}
-{#                                    <span class="js-likes">{{ article.likes | length }}</span>#}
-{#                                    <span class="js-label">Like</span>#}
-{#                                </a>#}
-{#                            </td>#}
-{#                        </tr>#}
-{#                    {% endif %}#}
-{#                {% else %}#}
-{#                    <tr>#}
-{#                        <td colspan="6">no records found</td>#}
-{#                    </tr>#}
-{#                {% endfor %}#}
-{#                </tbody>#}
-{#            </table>#}
 
 {% endblock %}

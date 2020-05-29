@@ -12,6 +12,7 @@ use App\Form\UserArticleType;
 use App\Repository\ArticleLikeRepository;
 use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,10 +24,18 @@ class ArticleController extends AbstractController
     /**
      * @Route("/article", name="article", methods={"GET"})
      */
-    public function index(ArticleRepository $articleRepository): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
+        $data = $this->getDoctrine()->getRepository(Article::class)->findBy([], ['createdAt' => 'desc']);
+
+        $articles = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1), // number of current page, 1 by default
+            6
+        );
+
         return $this->render('article/index.html.twig', [
-            'articles' => $articleRepository->findAll(),
+            'articles' => $articles,
         ]);
     }
 

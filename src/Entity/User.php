@@ -24,6 +24,8 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email
+     * @Assert\NotBlank()
      */
     private $email;
 
@@ -35,6 +37,9 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     *  @Assert\NotBlank(
+     *     message = "Please, enter a password"
+     * )
      * @Assert\Length(
      *      min = 6,
      *      minMessage = "Your password must be at least {{ limit }} characters long",
@@ -55,11 +60,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $lastname;
 

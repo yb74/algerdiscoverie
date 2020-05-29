@@ -40,22 +40,10 @@ class RegistrationType extends AbstractType
                 ]
             ])
             ->add('password', RepeatedType::class, [
-                'attr' => [
-                    'type' => PasswordType::class,
-                    'required' => true,
-                ],
-                'first_options' => [
-                    'label' => 'Password',
-                    'attr' => [
-                    'placeholder' => 'Your password',
-                    ]
-                ],
-                'second_options' => [
-                    'label' => 'Confirm Password',
-                    'attr' => [
-                    'placeholder' => 'Confirm your password',
-                    ]
-                ],
+                'type' => PasswordType::class,
+                'required' => true,
+                'first_options' => ['label' => 'Password'],
+                'second_options' => ['label' => 'Confirm Password']
             ]);
     }
 

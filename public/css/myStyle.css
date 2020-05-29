@@ -111,6 +111,12 @@ path:hover {
     background-color: lightgrey;
 }
 
+/* PAGING */
+.pagination {
+    justify-content: center;
+    margin-top: 1em;
+}
+
 /* FOOTER */
 footer a {
     color: white;
