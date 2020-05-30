@@ -37,4 +37,19 @@
         </div>
     </section>
 
+    <section class="py-5">
+        <div class="container">
+            <!-- index of regions -->
+            <h3>List of region in Algeria :</h3>
+            <button class="btn btn-dark my-3" id="show_region_list_btn">Show</button>
+            <button class="btn btn-danger my-3" id="hide_region_list_btn">Hide</button>
+            <div id="region-list"></div>
+        </div>
+    </section>
+
 {% endblock %}
+
+ {% block javascripts %}
+     <script src="{{asset('js/regionData.js')}}"></script> <!--Json data of Algeria's regions-->
+     <script src="{{asset('js/mapConfig.js')}}"></script>
+ {% endblock %}

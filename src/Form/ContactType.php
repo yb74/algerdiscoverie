@@ -19,6 +19,7 @@ class ContactType extends AbstractType
                     'value' => 'info@algerdiscoverie.fr'
                 ]])
             ->add('subject')
+            ->add('subject', null, ['required'   => false,])
             ->add('message')
         ;
     }

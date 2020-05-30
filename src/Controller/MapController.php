@@ -20,26 +20,26 @@ class MapController extends AbstractController
         ]);
     }
 
-//    /**
-//     * @Route("/map/info", name="map_info")
-//     */
-//    public function showRegionData()
-//    {
-//        $entityManager = $this->getDoctrine()->getManager();
-//        $regions = $entityManager->getRepository(Region::class)->findAll();
-//
-////        $articles = $entityManager->getRepository(Article::class)->findBy(['ref' => $region->getRef()]);
-//
-//        $data = [];
-//        foreach ($regions as $key => $region) {
-//            $data[$key] ['coords'] = $region->getCoords();
-//            $data[$key] ['name'] = $region->getName();
-//            $data[$key] ['description'] = $region->getDescription();
-//            $data[$key] ['ref'] = $region->getRef();
-//        }
-//
-//        return $this->json($data);
-//    }
+    /**
+     * @Route("/map/info", name="map_info")
+     */
+    public function showRegionData()
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $regions = $entityManager->getRepository(Region::class)->findAll();
+
+//        $articles = $entityManager->getRepository(Article::class)->findBy(['ref' => $region->getRef()]);
+
+        $data = [];
+        foreach ($regions as $key => $region) {
+            $data[$key] ['coords'] = $region->getCoords();
+            $data[$key] ['name'] = $region->getName();
+            $data[$key] ['description'] = $region->getDescription();
+            $data[$key] ['ref'] = $region->getRef();
+        }
+
+        return $this->json($data);
+    }
 
 //    /**
 //     * @Route("/region/{id}/articles", name="ton_name")

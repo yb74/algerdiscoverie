@@ -17,13 +17,35 @@
     </header>
 
     <!-- Page Content -->
-    <section class="py-5">
+    <section class="py-4">
         <div class="container">
-            <h2 class="section-heading text-center py-4">
+            <!-- Message for pc and tabs only -->
+            <h2 class="section-heading text-center py-4 welcoming-message">
                 Welcome to ALGERdiscoveRIE ! <br>
                 <small class="text-muted">The purpose of this website is to make you discover the wonderful country of Algeria through its wide variety of cultures,
                     its magnificent landscapes, and its amazing and very welcoming inhabitants.</small>
             </h2>
+            <!-- Message for smartphone only -->
+            <div class="welcoming-message-smartphone">
+                <h3 class="text-center py-4"> Welcome to ALGERdiscoveRIE ! </h3>
+                <p>
+                    The purpose of this website is to make you discover the wonderful country of Algeria through its wide variety of cultures,
+                    its magnificent landscapes, and its amazing and very welcoming inhabitants.
+                </p>
+                <p>
+                    <a href= "{{ path('map') }}">Browse the map</a> and get some infos about Algeria's regions.
+                </p>
+                <p>
+                    Bring your contribution by <a href= "{{ path('registration') }}">signing up</a> to be able to write an article about a region.
+                </p>
+                <p>
+                    <a href= "{{ path('article') }}">Check the articles</a> related to each regions classified by categories.
+                </p>
+                <p>
+                    If you have any question or suggestion, please don't hesitate to <a href= "{{ path('contact') }}">contact us</a>.
+                    We always keep improving the website to provide you the best experience.
+                </p>
+            </div>
 
             <!--Carousel Wrapper-->
             <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
@@ -39,11 +61,11 @@
                 <div class="carousel-inner" role="listbox">
                     <div class="carousel-item active">
                         <div class="view">
-                            <img class="d-block w-100" src="{{ asset('/img/slider/slide1.png') }}"
+                            <img class="d-block w-100" src="{{ asset('/img/slider/slide1.jpg') }}"
                                  alt="First slide">
                             <div class="mask rgba-black-light"></div>
                         </div>
-                        <div class="carousel-caption bg-dark">
+                        <div class="carousel-caption">
                             <h3 class="h3-responsive">Interactive map</h3>
                             <p> Browse the map to discover the regions of Algeria and their main information.</p>
                             <a href= "{{ path('map') }}" class="btn btn-primary">To the map</a>
@@ -52,7 +74,7 @@
                     <div class="carousel-item">
                         <!--Mask color-->
                         <div class="view">
-                            <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(6).jpg"
+                            <img class="d-block w-100" src="{{ asset('/img/slider/slide2.jpg') }}"
                                  alt="Second slide">
                             <div class="mask rgba-black-strong"></div>
                         </div>
@@ -65,7 +87,7 @@
                     <div class="carousel-item">
                         <!--Mask color-->
                         <div class="view">
-                            <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(9).jpg"
+                            <img class="d-block w-100" src="{{ asset('/img/slider/slide3.jpg') }}"
                                  alt="Third slide">
                             <div class="mask rgba-black-slight"></div>
                         </div>
@@ -81,7 +103,7 @@
                     <div class="carousel-item">
                         <!--Mask color-->
                         <div class="view">
-                            <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(9).jpg"
+                            <img class="d-block w-100" src="{{ asset('/img/slider/slide4.jpg') }}"
                                  alt="Fourth slide">
                             <div class="mask rgba-black-slight"></div>
                         </div>

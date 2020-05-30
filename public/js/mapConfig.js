@@ -25,37 +25,39 @@ class Map {
         // this.displayPopup(); // adding popup
         // this.displayModal(); // adding modal
 
-        // this.getRegion();
+        this.getRegionList();
     }
 
-    // getRegion() {
-    //     this.polygonTemplate.events.on("hit", ev => {
-    //
-    //         fetch('/map/info')
-    //             .then(response => response.json())
-    //             .then(regions => regions.forEach((region) => {
-    //                 let regionData = {
-    //                     ref: region.ref,
-    //                     coords: region.coords,
-    //                     name: region.name,
-    //                     description: region.description
-    //                 };
-    //                 // console.log(regionData);
-    //                     console.log(regionData.name);
-    //
-    //                     let html = "";
-    //
-    //                     html += "<tr>";
-    //                     html += "<td>" + region.ref + "</td>";
-    //                     html += "<td>" + region.coords + "</td>";
-    //                     html += "<td>" + region.name + "</td>";
-    //                     html += "<td>" + region.description + "</td>";
-    //                     html += "</tr>";
-    //                     document.getElementById("region_info").innerHTML += html;
-    //             }))
-    //             .catch(error => console.log('Error', error));
-    //     });
-    // }
+    getRegionList() {
+        fetch('/map/info')
+            .then(response => response.json())
+            .then(regions => regions.forEach((region) => {
+                let regionData = {
+                    ref: region.ref,
+                    coords: region.coords,
+                    name: region.name,
+                    description: region.description
+                };
+
+                $("#show_region_list_btn").on('click', () => {
+                    let html = "";
+                    html += "<p><span class='font-weight-bold'>Zip code :</span> " + regionData.ref + "</p>";
+                    html += "<p><span class='font-weight-bold'>Region name :</span>" + region.name + "</p>";
+                    document.getElementById("region-list").innerHTML += html;
+
+                    $("#show_region_list_btn").hide();
+                    $("#hide_region_list_btn").show();
+                    document.getElementById("region-list").style.display = "block";
+                });
+
+                $("#hide_region_list_btn").on('click', () => {
+                    $("#show_region_list_btn").show();
+                    $("#hide_region_list_btn").hide();
+                    document.getElementById("region-list").style.display = "none";
+                });
+            }))
+            .catch(error => console.log('Error', error));
+    }
 
     configMap() {
         this.polygonSeries.useGeodata = true;
@@ -63,7 +65,6 @@ class Map {
 
         // adding tooltipText
         this.map.tooltip.getFillFromObject = false;
-        console.log(this.map.tooltip.background.fill = am4core.color("red"));
         this.polygonTemplate.tooltipText = "{name}";
         this.polygonTemplate.fill = am4core.color("#74B266"); // polygon color
 

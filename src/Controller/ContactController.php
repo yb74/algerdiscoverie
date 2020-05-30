@@ -25,7 +25,7 @@ class ContactController extends AbstractController
             // we define sender
             ->setFrom($contact->getEmail())
             // we define receiver
-            ->setTo('yb74@hotmail.fr')
+            ->setTo('alger.discoverie@webagencypro.fr')
                 // We define the subject
             ->setSubject($contact->getSubject())
 

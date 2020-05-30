@@ -3,28 +3,27 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    {#        <link rel="shortcut icon" href="/public/images/favicon.ico" type="image/x-icon">#}
-    {#        <link rel="icon" href="/public/images/favicon.ico" type="image/x-icon">#}
-    {#        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">#}
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon.png">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Blog of Jean Forteroche">
-    <meta name="author" content="Jean Forteroche">
+    <meta name="description" content="Interactive map of Algeria by Younes Bouaziz">
+    <meta name="author" content="Younes Bouaziz">
 
     <title>{% block title %}Welcome!{% endblock %}</title>
 
     <!-- FB Open Graph data -->
-    <meta property="og:title" content="Single ticket for Alaska by Jean Forteroche" />
-    <meta property="og:type" content="Online novel" />
-    {#        <meta property="og:url" content="http://www.jeanforteroche.webagencypro.fr" />#}
-    {#        <meta property="og:image" content="public/img/logo.jpg" />#}
-    <meta property="og:description" content="Come and take a tour to Alaska through the latest online novel by Jean Forteroche"/>
+    <meta property="og:title" content="Interactive map of Algeria" />
+    <meta property="og:type" content="Interactive encyclopedia" />
+    <meta property="og:url" content="http://alger.discoverie.webagencypro.fr" />
+    <meta property="og:image" content="img/dz-flag.png" />
+    <meta property="og:description" content="Who said that Algeria is only a big desert with and a dangerous country. Come and see the reality about Algeria. You will fall in love with this wonderful country."/>
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="Online novel" />
-    <meta name="twitter:title" content="Single ticket for Alaska by Jean Forteroche" />
-    {#        <meta name="twitter:image:src" content="http://www.jeanforteroche.webagencypro.fr/public/images/logo.png" />#}
-    <meta name="twitter:description" content="Come and to take a tour to Alaska through the latest online novel by Jean Forteroche"/>
+    <meta name="twitter:site" content="interactive encyclopedia" />
+    <meta name="twitter:title" content="Interactive map of Algeria, by Younes Bouaziz" />
+    <meta name="twitter:image:src" content="http://alger.discoverie.webagencypro.fr/public/img/dz-flag.png" />
+    <meta name="twitter:description" content="Who said that Algeria is only a big desert with and a dangerous country. Come and see the reality about Algeria. You will fall in love with this wonderful country."/>
 
     <!-- TinyMCE -->
     <script src="https://cdn.tiny.cloud/1/j7edr96twwloguzfrtwtxsez5j6jx7gbta70ac6v012jsl6z/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
@@ -40,12 +39,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-    <link rel="shortcut icon" href="{{asset('assets/img/ico/favicon.ico')}}">
-    <link rel="apple-touch-icon" sizes="144x144" href="{{asset('assets/img/ico/apple-touch-icon-144x144.png')}}">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{asset('assets/img/ico/apple-touch-icon-114x114.png')}}">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{asset('assets/img/ico/apple-touch-icon-72x72.png')}}">
-    <link rel="apple-touch-icon" href="{{asset('assets/img/ico/apple-touch-icon-57x57.png')}}">
-
     <!-- Bootstrap Core CSS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -54,9 +47,6 @@
 
     <!-- my CSS -->
     <link href="{{asset('css/myStyle.css')}}" rel="stylesheet">
-
-    <!-- Bootstrap -->
-{#    <link href="{{asset('bootstrap/bootstrap.min')}}" rel="stylesheet">#}
 
     {% block stylesheets %}{% endblock %}
 </head>
@@ -163,9 +153,6 @@
 </footer>
 <!-- Footer -->
 
-        {% block javascripts %}
-            <script src="{{asset('js/regionData.js')}}"></script> <!--Json data of Algeria's regions-->
-            <script src="{{asset('js/mapConfig.js')}}"></script>
-        {% endblock %}
+        {% block javascripts %} {% endblock %}
 </body>
 </html>
