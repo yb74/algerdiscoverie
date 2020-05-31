@@ -135,7 +135,7 @@ class Article
     private $published;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ArticleLike", mappedBy="article")
+     * @ORM\OneToMany(targetEntity="App\Entity\ArticleLike", mappedBy="article", orphanRemoval=true)
      */
     private $likes;
 
