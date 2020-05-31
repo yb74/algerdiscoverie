@@ -20,7 +20,7 @@ class Comment
     /**
      * @ORM\Column(type="text")
      * @Assert\Regex(
-     *     pattern = "/^[a-zA-Z0-9,\.!éè\^êâôûëäöïü\?;\/\-\+\* ]+$/",
+     *     pattern = "/^[a-zA-Z0-9,\.!éè\^êâôûëäöïüà\?;\/\-\+\* ]+$/",
      *     message="There is an invalid symbol in the following message: {{ value }}"
      * )
      */
