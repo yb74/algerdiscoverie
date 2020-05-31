@@ -28,8 +28,6 @@ class MapController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $regions = $entityManager->getRepository(Region::class)->findAll();
 
-//        $articles = $entityManager->getRepository(Article::class)->findBy(['ref' => $region->getRef()]);
-
         $data = [];
         foreach ($regions as $key => $region) {
             $data[$key] ['coords'] = $region->getCoords();
@@ -40,24 +38,4 @@ class MapController extends AbstractController
 
         return $this->json($data);
     }
-
-//    /**
-//     * @Route("/region/{id}/articles", name="ton_name")
-//     * @param RegionRepository $repo
-//     * @param $id
-//     * @return Response
-//     */
-//    public function RegionArticles(RegionRepository $repo, $id)
-//    {
-//        $region = $repo->find($id);
-//        $articles = $region->getArtciles();
-//        dump($artciles);
-//
-//        if($region->getArticles()) {
-//            return $this->render('ta_view.html.twig', [
-//                'region' => region,
-//                'articles' => $articles
-//            ]);
-//        }
-//    }
 }

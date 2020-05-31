@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
@@ -18,6 +19,10 @@ class Comment
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Regex(
+     *     pattern = "/^[a-zA-Z0-9,\.!éè\^êâôûëäöïü\?;\/\-\+\* ]+$/",
+     *     message="There is an invalid symbol in the following message: {{ value }}"
+     * )
      */
     private $content;
 

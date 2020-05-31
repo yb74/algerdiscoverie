@@ -7,9 +7,9 @@
     <header class="masthead">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
-                <div class="col-12 text-center bg-white">
+                <div class="col-12 text-center text-white masthead-frame">
                     <h1 class="font-weight-light">Manage users</h1>
-                    <p class="lead">Subtile</p>
+                    <p class="lead">Subtitle</p>
                 </div>
             </div>
         </div>
@@ -35,7 +35,6 @@
                                 <div class="case">
                                     <div class="row">
                                         {% for user in users %}
-                                            {% if user.roles[0] == 'ROLE_USER' %}
                                                 <div class="col-xl-4 col-lg-6 col-md-12 card py-5 card-dashboard">
                                                     <div class="text w-100 pl-md-3 text-center">
                                                         <p class="text-center">Firstname</p>
@@ -55,6 +54,7 @@
                                                             {{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}
                                                         </h3>
                                                         <br>
+                                            {% if user.roles[0] == 'ROLE_USER' %}
                                                         <p class="text-center">Available options</p>
                                                         <div class="d-flex justify-content-center">
                                                             <a href="{{ path('delete_user', {'id': user.id }) }}" class="btn btn-danger">Delete</a>                                       </div>

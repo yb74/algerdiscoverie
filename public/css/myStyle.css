@@ -1,3 +1,7 @@
+img {
+    width: 100%;
+}
+
 /* NAVBAR */
 .navbar-light .navbar-nav .nav-link:hover {
     color: dodgerblue;
@@ -18,9 +22,14 @@
     background-repeat: no-repeat;
 }
 
+.masthead-frame {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
 /* carousel */
 .carousel-caption {
     background-color: rgba(0, 0, 0, 0.7);
+    padding: 15px;
 }
 
 .carousel-control-next-icon, .carousel-control-prev-icon {
