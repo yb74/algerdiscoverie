@@ -21,7 +21,7 @@ class AdminController extends AbstractController
      */
     public function index(Request $request, PaginatorInterface $paginator): Response
     {
-        $data = $this->getDoctrine()->getRepository(Article::class)->findBy([], ['createdAt' => 'desc']);
+        $data = $this->getDoctrine()->getRepository(Article::class)->findBy(['published' => 'true']);
 
         $articles = $paginator->paginate(
             $data,
