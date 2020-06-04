@@ -72,6 +72,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Timezone
      */
     private $CreatedAt;
 

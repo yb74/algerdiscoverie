@@ -37,6 +37,8 @@ class ContactController extends AbstractController
                 'text/html'
             );
 
+            $contact->setCreatedAt(new \DateTime());
+
             // Sending the message
             $mailer->send($swiftMessage); // swift message
 

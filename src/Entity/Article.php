@@ -109,6 +109,7 @@ class Article
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\Timezone
      */
     private $createdAt;
 
