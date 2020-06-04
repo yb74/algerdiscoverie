@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Comment list{% endblock %}
+{% block title %}Manage comments{% endblock %}
 
 {% block body %}
 
@@ -8,7 +8,7 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12 text-center text-white masthead-frame">
-                    <h1 class="font-weight-light">Reported comments</h1>
+                    <h1 class="font-weight-light">Manage comments</h1>
                     <p class="lead">Subtitle</p>
                 </div>
             </div>
@@ -34,37 +34,35 @@
                             <div class="case">
                                 <div class="row">
                                     {% for comment in comments %}
-                                        {% if(comment.reported > 0) %}
-                                            <div class="col-xl-4 col-lg-6 col-md-12 card py-5 card-dashboard">
-                                                <div class="text w-100 pl-md-3 text-center">
-                                                    <p class="text-center">Author</p>
-                                                    <h3 class="text-center">
-                                                        {{ comment.username.firstname }}
-                                                    </h3>
-                                                    <p class="text-center">Article commented</p>
-                                                    <h3 class="text-center">
-                                                        {{ comment.article.title }}
-                                                    </h3>
-                                                    <p class="text-center">Content</p>
-                                                    <h3 class="text-center">
-                                                        {{ comment.content }}
-                                                    </h3>
-                                                    <p class="text-center">Creation date</p>
-                                                    <h3 class="text-center">
-                                                        {{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}
-                                                    </h3>
-                                                    <p class="text-center">Number of reports</p>
-                                                    <h3 class="text-center">
-                                                        {{ comment.reported }}
-                                                    </h3>
-                                                    <br>
-                                                    <p class="text-center">Available options</p>
-                                                    <div class="d-flex justify-content-center">
-                                                        <a href="{{ path('unreport_comment', {'id': comment.id}) }}" class="btn btn-success btn-sm mx-2">Unreport</a>
-                                                        <a href="{{ path('delete_comment', {'id': comment.id}) }}" class="btn btn-danger btn-sm mx-2">Delete</a>                                        </div>
-                                                </div>
+                                        <div class="col-xl-4 col-lg-6 col-md-12 card py-5 card-dashboard">
+                                            <div class="text w-100 pl-md-3 text-center">
+                                                <p class="text-center">Author</p>
+                                                <h3 class="text-center">
+                                                    {{ comment.username.firstname }}
+                                                </h3>
+                                                <p class="text-center">Article commented</p>
+                                                <h3 class="text-center">
+                                                    {{ comment.article.title }}
+                                                </h3>
+                                                <p class="text-center">Content</p>
+                                                <h3 class="text-center">
+                                                    {{ comment.content }}
+                                                </h3>
+                                                <p class="text-center">Creation date</p>
+                                                <h3 class="text-center">
+                                                    {{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}
+                                                </h3>
+                                                <p class="text-center">Number of reports</p>
+                                                <h3 class="text-center">
+                                                    {{ comment.reported }}
+                                                </h3>
+                                                <br>
+                                                <p class="text-center">Available options</p>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="{{ path('unreport_comment', {'id': comment.id}) }}" class="btn btn-success btn-sm mx-2">Unreport</a>
+                                                    <a href="{{ path('delete_comment', {'id': comment.id}) }}" class="btn btn-danger btn-sm mx-2">Delete</a>                                        </div>
                                             </div>
-                                        {% endif %}
+                                        </div>
                                     {% endfor %}
                                 </div>
                             </div>
