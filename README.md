@@ -1,4 +1,6 @@
-# ALGERdiscoveRIE is an app to provide information about Algeria and show how Algeria is a beautiful country with very welcoming inhabitants.
+# ALGERdiscoveRIE, the app that will make you travel and learn about Algeria
+
+ALGERdiscoveRIE is an app to provide information about Algeria and show how Algeria is a beautiful country with very welcoming inhabitants.
 
 Features : 
 
